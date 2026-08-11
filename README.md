@@ -10,27 +10,27 @@
 > actually different here from a plain upstream checkout.
 
 The web UI a human actually clicks through at `https://verifier.localhost/`
-— a Angular single-page app that talks to the [`eudi-verifier`](../eudi-verifier/)
+— a Angular single-page app that talks to the [`eudi-srv-verifier-endpoint`](../eudi-srv-verifier-endpoint/)
 Kotlin backend's REST API to build an OpenID4VP presentation request, show
 its QR code / deep link, and display the verified result once a wallet
 responds. This app owns **no verification logic of its own** — it's a
 client for the backend, which is the actual trust anchor (see
-`eudi-verifier`'s own README for the protocol details).
+`eudi-srv-verifier-endpoint`'s own README for the protocol details).
 
 ## How this fits into the demo
 
 `demo-up.sh` never runs anything in *this* directory directly. Instead,
-[`../eudi-verifier/docker-compose/docker-compose.yaml`](../eudi-verifier/docker-compose/docker-compose.yaml)
+[`../eudi-srv-verifier-endpoint/docker-compose/docker-compose.yaml`](../eudi-srv-verifier-endpoint/docker-compose/docker-compose.yaml)
 builds this whole project as its own Docker stage (see this directory's
 own `Dockerfile`) and runs it as that compose file's `verifier-ui`
-service, reachable through [the gateway](../gateway/) at
+service, reachable through [the gateway](../eudi-gateway/) at
 `https://verifier.localhost/`. So:
 
 - **To use it**: just open `https://verifier.localhost/` once
   `./demo-up.sh` has brought everything up — nothing to run here.
 - **To rebuild it** after editing source in this directory:
   ```bash
-  cd ../eudi-verifier/docker-compose
+  cd ../eudi-srv-verifier-endpoint/docker-compose
   docker compose build verifier-ui
   docker compose up -d verifier-ui --force-recreate
   ```
@@ -38,9 +38,9 @@ service, reachable through [the gateway](../gateway/) at
   instead of rebuilding the Docker image on every change, see "Local dev
   server" below.
 
-It's easy to confuse this directory with **`eudi-verifier/`** — see the
-[top-level README's naming note](../README.md#a-naming-note-eudi-verifier-vs-eudi-web-verifier)
-for the full explanation. Short version: `eudi-verifier` is the backend
+It's easy to confuse this directory with **`eudi-srv-verifier-endpoint/`** — see the
+[top-level README's naming note](../README.md#a-naming-note-eudi-srv-verifier-endpoint-vs-eudi-web-verifier)
+for the full explanation. Short version: `eudi-srv-verifier-endpoint` is the backend
 engine (Kotlin), this is the UI (Angular) that talks to it.
 
 ## Re-designed for this demo
@@ -93,9 +93,9 @@ Open **http://localhost:4200**. `src/proxy.conf.json` proxies API calls to
 a verifier backend — by default this expects one reachable the way
 `ng serve` is configured for; if you want it pointed at *this demo's*
 already-running backend instead, edit that file to target
-`https://verifier.localhost/` (or wherever [`eudi-verifier`](../eudi-verifier/)'s
+`https://verifier.localhost/` (or wherever [`eudi-srv-verifier-endpoint`](../eudi-srv-verifier-endpoint/)'s
 own compose stack is reachable) and make sure that stack is up first
-(`docker compose up -d` from `eudi-verifier/docker-compose/`).
+(`docker compose up -d` from `eudi-srv-verifier-endpoint/docker-compose/`).
 
 `set-env.js` (run automatically via the `config` npm script ahead of
 `start`/`build`/`watch`) generates `src/environments/environment*.ts` from
@@ -104,7 +104,7 @@ own compose stack is reachable) and make sure that stack is up first
 ## Building the way `demo-up.sh` does
 
 ```bash
-docker compose build verifier-ui   # from ../eudi-verifier/docker-compose/
+docker compose build verifier-ui   # from ../eudi-srv-verifier-endpoint/docker-compose/
 ```
 
 This runs the multi-stage `Dockerfile` in this directory: a Node stage
