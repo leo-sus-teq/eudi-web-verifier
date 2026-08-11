@@ -1,5 +1,8 @@
 <header class="container">
-  <img src="assets/ic-logo.svg" (click)="goHome()" alt="wallet-logo" />
+  <div class="brand" (click)="goHome()">
+    <img class="brand-logo" src="assets/trusteq-logo.png" alt="TRUSTEQ - EUDI Demo Wallet" />
+    <span class="role-badge">Verifier</span>
+  </div>
 
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
     <mat-icon>menu</mat-icon>

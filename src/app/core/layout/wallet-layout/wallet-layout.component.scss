@@ -8,10 +8,10 @@
     width: 100vw;
 
     .compatibility-note {
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid temp.$dividerDark;
         margin-top: 2rem;
         padding-top: 0.5rem;
-        color: gray;
+        color: temp.$textDarkSecondary;
         font-size: 0.95rem;
         text-align: center;
     }

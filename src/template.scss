@@ -1,8 +1,13 @@
 @use "sass:map";
 
+// Shared dark theme, matching the issuer (eudi-srv-pid-issuer/.../main.css) and
+// wallet (eudi_web_wallet/static/style.css) apps' palette exactly (same hex
+// values) so the three demo apps read as one system. $role below is this app's
+// own addition: a small distinguishing accent per app, used only for the
+// header's role badge - see wallet-layout-header.component.scss.
 $palette: (
     color: (
-        primary:#2A5ED9,
+        primary: #006EDF,
         secondary: #D6D9F9,
         success: #55953B,
         warning: #F39626,
@@ -11,15 +16,15 @@ $palette: (
     ),
     general: (
         bg: (
-            default: hsl(0deg 0% 92%),
-            paper: hsl(0deg 0% 100%)
+            default: #0f1220,
+            paper: #1a1e33
         ),
         text: (
             primary: (
-                dark: hsl(0deg 0% 13%)
+                dark: #e8eaf6
             ),
             secondary: (
-                dark: hsl(0deg 0% 44%),
+                dark: #9aa0c3,
                 light: hsl(0deg 0% 99%),
             ),
             disabled: (
@@ -28,10 +33,20 @@ $palette: (
             )
         ),
         divider: (
-            dark: hsl(0deg 0% 84%),
+            dark: #2a2f4a,
         )
     )
 );
+
+// Role badge colors: issuer reuses the shared brand blue (it *is* the brand's
+// primary touchpoint); verifier/wallet reuse this palette's own pre-existing
+// info/warning tones rather than inventing new ones.
+$role: (
+    issuer: #006EDF,
+    verifier: #8145BD,
+    wallet: #F39626
+);
+
 $spaceBasic: 1.5rem;
 $space: (
     top: 2rem,
@@ -44,7 +59,7 @@ $backgroundPaper: map.get(map.get(map.get($palette, general), bg), paper);
 $textDarkSecondary: map.get(map.get(map.get(map.get($palette, general), text), secondary), dark);
 $textDarkPrimary: map.get(map.get(map.get(map.get($palette, general), text), primary), dark);
 $dividerDark: map.get(map.get(map.get($palette, general), divider), dark);
-$max-body-panel: 34.375em;
+$roleVerifier: map.get($role, verifier);
 $max-body-width: 31.25rem;
 $max-body-height: 31.25rem;
 $min-body-width: 21.875rem;

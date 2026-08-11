@@ -3,18 +3,20 @@
     <mat-card class="example-card">
       <mat-card-content>
         <p *ngIf="isCrossDevice" style="text-align: center">
-          <qrcode
-            [qrdata]="deepLinkTxt"
-            [allowEmptyString]="false"
-            [ariaLabel]="'QR Code image with the following content...'"
-            [cssClass]="'center'"
-            [elementType]="'canvas'"
-            [errorCorrectionLevel]="'L'"
-            [margin]="2"
-            [title]="deepLinkTxt"
-            [width]="300"
-            (qrCodeURL)="onChangeURL($event)"
-          />
+          <span class="qr-frame">
+            <qrcode
+              [qrdata]="deepLinkTxt"
+              [allowEmptyString]="false"
+              [ariaLabel]="'QR Code image with the following content...'"
+              [cssClass]="'center'"
+              [elementType]="'canvas'"
+              [errorCorrectionLevel]="'L'"
+              [margin]="2"
+              [title]="deepLinkTxt"
+              [width]="300"
+              (qrCodeURL)="onChangeURL($event)"
+            />
+          </span>
         </p>
 
         <mat-divider *ngIf="isCrossDevice" />
@@ -33,6 +35,11 @@
           <a mat-raised-button class="authorize" [href]="deepLinkTxt"
             >OPEN WITH YOUR WALLET</a
           >
+
+          <details class="link-reveal">
+            <summary class="copy-hint">Or copy the link below</summary>
+            <code class="deep-link-uri">{{ deepLinkTxt }}</code>
+          </details>
         </div>
 
         <mat-divider />

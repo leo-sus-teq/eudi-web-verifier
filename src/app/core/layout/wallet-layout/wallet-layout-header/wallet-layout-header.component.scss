@@ -10,10 +10,39 @@
   );
   border-bottom-style: solid;
   align-items: center;
-  box-shadow: 0px 1px 20px rgb(207, 207, 207);
+  // Dark-theme-appropriate shadow: the previous light rgb(207,207,207) glow
+  // read as a washed-out halo once the page background went dark.
+  box-shadow: 0 1px 16px rgba(0, 0, 0, 0.35);
 
   header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+
+    // Same TRUSTEQ mark and height as the issuer/wallet apps' own headers.
+    .brand-logo {
+      height: 40px;
+      width: auto;
+    }
+  }
+
+  // Distinguishes this app from the issuer/wallet at a glance while every
+  // other header element (logo, menu, shared brand color) stays identical.
+  .role-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    background: temp.$roleVerifier;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
   }
 }

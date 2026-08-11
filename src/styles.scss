@@ -3,16 +3,64 @@
 @use "/src/layout-breakpoint" as points;
 @use "sass:map";
 
+/* Self-hosted (not loaded from fonts.googleapis.com) so this app never depends
+   on an external font request at runtime - same font, packaged the same way,
+   as the issuer/wallet apps' own stylesheets. Latin + Latin-ext only
+   (English/German/EU text; this is a demo, not a full i18n product). */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 html {
   height: 100vh;
   width: 100vw;
 }
 
 body {
-  font-family: Roboto, "Helvetica Neue", sans-serif; margin: 0;
-  background: map.get(map.get(map.get(temp.$palette, general), bg), paper);
+  font-family: 'Inter', Roboto, "Helvetica Neue", sans-serif; margin: 0;
+  background: map.get(map.get(map.get(temp.$palette, general), bg), default);
+  color: temp.$textDarkPrimary;
   height: inherit;
   overflow-x: hidden;
+}
+
+a {
+  color: map.get(map.get(temp.$palette, color), primary);
+}
+
+// Material's own dark-theme "card"/"dialog" background slot is a fixed generic
+// grey (#424242) baked into mat.m2-define-dark-theme's internal background
+// palette - every non-MDC-ported component (expansion panel, menu, etc.) and
+// several MDC surfaces render with it regardless of our custom primary color.
+// Overriding the theme's own background map is deep Sass theming ceremony for
+// a demo reskin; overriding the rendered surfaces directly is the pragmatic
+// fix so nothing looks like a different, unthemed product bolted on (mat-card
+// is styled per-component already, e.g. qr-code.component.scss).
+.mat-mdc-menu-panel,
+.mdc-dialog__surface,
+.mat-stepper-vertical,
+.mat-stepper-horizontal,
+.mat-expansion-panel,
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel,
+.mat-mdc-snack-bar-container,
+.mat-bottom-sheet-container,
+.mat-mdc-card {
+  background: temp.$backgroundPaper !important;
+  color: temp.$textDarkPrimary !important;
 }
 
 main {
@@ -22,10 +70,33 @@ main {
   padding: 0;
 }
 
+// Set by the detection script in index.html when this app is shown inside
+// the demo dashboard's iframe (see ../../dashboard/). Targets the header
+// component's host element by tag name - global styles aren't affected by
+// Angular's view encapsulation, so this reaches it despite living outside
+// that component's own .scss file.
+html.is-embedded vc-wallet-layout-header {
+  display: none;
+}
+
 .container {
   max-width: 36em;
   margin: 0 auto;
   padding: 0 0.5rem;
+  box-sizing: border-box;
+  // wallet-layout's :host is a column flexbox and .container is its one flex
+  // item; without an explicit width it doesn't actually stretch to the
+  // container's cross size the way normal in-flow block children would - it
+  // sizes to its own content instead. On a narrow phone that let a wide
+  // child deep inside (the vertical stepper's form-fields, see styles.scss's
+  // other mobile stepper fixes below) pull this element - and everything
+  // measuring "100%" of it - wider than the viewport, silently clipped by
+  // main's overflow-x:hidden instead of visibly overflowing or wrapping.
+  // Confirmed empirically: forcing these two properties is what actually
+  // fixes it (min-width:0 alone, tried first, did not).
+  width: 100%;
+  align-self: stretch;
+  min-width: 0;
 }
 
 .bg-panel {
@@ -34,13 +105,33 @@ main {
   padding: 1.5rem;
 }
 
-@media (max-width: 599px) {
+@media (max-width: map.get(points.$breakpoints, sm)) {
   div.mat-vertical-content-container {
     margin-left: 0;
     position: initial;
     .mat-vertical-content{
       padding: 0;
     }
+  }
+
+  // The vertical stepper (this app's full step-by-step "Advanced" wizard,
+  // see home.component.html) otherwise forces itself and everything sharing
+  // its container wider than a phone screen - a side-by-side pair of
+  // mat-form-fields inside one attestation's format/attribute-method picker
+  // (attestation-selection.component.html) doesn't wrap on its own. Since
+  // main{overflow-x:hidden} above silently clips instead of scrolling,
+  // an unconstrained width here doesn't just look bad, it hides content.
+  .mat-stepper-vertical,
+  .mat-vertical-content-container,
+  .mat-vertical-stepper-content,
+  .mat-vertical-content {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .component-root mat-form-field {
+    display: block;
+    width: 100%;
   }
 }
 

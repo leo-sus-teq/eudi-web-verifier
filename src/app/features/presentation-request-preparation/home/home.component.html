@@ -1,150 +1,184 @@
 <vc-wallet-layout>
   <div body>
-    <h4>Define your presentation request</h4>
-    <p>
-      Follow the steps to specify what will be requested from the wallet to
-      present.
+    <h4>Verify a credential</h4>
+    <p class="verifier-hint">
+      Pick a credential below, then scan the QR code with your EUDI Wallet app to verify it.
     </p>
-    <mat-stepper orientation="vertical" linear #stepper>
-      <form>
-        <mat-step>
-          <div>
-            <ng-template matStepLabel>... select attestation(s)</ng-template>
-            <vc-supported-attestations
-              (selectionChangedEvent)="handleSelectionChangedEvent($event)"
-            ></vc-supported-attestations>
-          </div>
 
-          <div class="button-container">
-            <button
-              mat-raised-button
-              matStepperNext
-              [disabled]="!attestationsSelected()"
-            >
-              Next
-            </button>
-          </div>
-        </mat-step>
+    <!-- One click to pick a credential (requests every attribute, over the
+         redirects/HAIP defaults) - the common case for just trying the demo.
+         Populated from the same SUPPORTED_ATTESTATIONS list the full wizard
+         below uses; see home.component.ts's selectQuickAttestation(). -->
+    <div class="credential-card-grid">
+      <button
+        type="button"
+        class="credential-card"
+        *ngFor="let attestation of quickAttestations"
+        [class.selected]="quickSelectedType === attestation.type"
+        [disabled]="!commonOptionsReady"
+        (click)="selectQuickAttestation(attestation.type)"
+      >
+        <span class="credential-card-icon" aria-hidden="true">{{ iconFor(attestation.type) }}</span>
+        <span class="credential-card-label">{{ attestation.name }}</span>
+      </button>
+    </div>
 
-        <mat-step>
-          <div>
-            <ng-template matStepLabel
-            >...select attestation(s) attributes
-            </ng-template
-            >
-            <vc-attribute-selection
-              *ngIf="selectedAttestations !== null"
-              [attestationsSelection]="selectedAttestations"
-              (attributesCollectedEvent)="
-                handleAttributesCollectedEvent($event)
-              "
-            ></vc-attribute-selection>
-          </div>
-          <div class="button-container">
-            <button mat-raised-button matStepperPrevious>Back</button>
-            <button
-              mat-raised-button
-              matStepperNext
-              [disabled]="!attributesSelected()"
-            >
-              Next
-            </button>
-          </div>
-        </mat-step>
+    <div class="button-container" style="justify-content: center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="proceedToInvokeWallet()"
+        [disabled]="!canSubmit()"
+      >
+        Verify
+      </button>
+    </div>
 
-        <mat-step>
-          <div style="padding-top: 10px">
-            <ng-template matStepLabel>...select presentation options and submit</ng-template>
+    <details class="advanced-section">
+      <summary>Advanced: customize attributes, format, and submission options</summary>
 
-            <mat-tab-group (selectedTabChange)="handleRequestModeChange($event)">
-
-              <!-------------------------------------------------------------------->
-              <!-------------------------------------------------------------------->
-              <!----------------------- RESPONSE VIA REDIRECTS---------------------->
-              <!-------------------------------------------------------------------->
-              <!-------------------------------------------------------------------->
-
-
-              <mat-tab label="Submit with Redirects">
-
-                <div class="presentation-options-container">
-                  <vc-presentation-options-redirects
-                    (optionsChanged)="handleRedirectsPresentationOptionsChangedEvent($event)"
-                  ></vc-presentation-options-redirects>
-                </div>
-
-
-
-
-              </mat-tab>
-
-              <!-------------------------------------------------------------------->
-              <!-------------------------------------------------------------------->
-              <!------------------------ RESPONSE VIA DC API ----------------------->
-              <!-------------------------------------------------------------------->
-              <!-------------------------------------------------------------------->
-
-              <mat-tab label="Submit via DC API">
-
-                <div class="presentation-options-container">
-                  <vc-presentation-options-dc-api
-                    (optionsChanged)="handleDcApiPresentationOptionsChangedEvent($event)"
-                  ></vc-presentation-options-dc-api>
-                </div>
-
-
-              </mat-tab>
-
-            </mat-tab-group>
-
-            <vc-presentation-options-registration-certificate
-              (registrationCertificateOptionsChanged)="handleRegistrationCertificateOptionsChangedEvent($event)"
-            ></vc-presentation-options-registration-certificate>
+      <mat-stepper orientation="vertical" linear #stepper>
+        <form>
+          <mat-step>
+            <div>
+              <ng-template matStepLabel>... select attestation(s)</ng-template>
+              <vc-supported-attestations
+                (selectionChangedEvent)="handleSelectionChangedEvent($event)"
+              ></vc-supported-attestations>
+            </div>
 
             <div class="button-container">
-              <button mat-raised-button matStepperPrevious type="button">
-                Back
-              </button>
               <button
                 mat-raised-button
                 matStepperNext
-                type="button"
-                (click)="proceedToInvokeWallet()"
-                [disabled]="!canSubmit()"
+                [disabled]="!attestationsSelected()"
               >
-                Submit
+                Next
               </button>
             </div>
+          </mat-step>
 
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title
-                ><span
-                >Your presentation request so far...</span
-                ></mat-panel-title
-                >
-              </mat-expansion-panel-header>
-
-              <button
-                mat-button
-                matTooltip="Copy content"
-                style="float: right"
-                *ngIf="canProceed()"
-                [cdkCopyToClipboard]="initializationRequest | json"
+          <mat-step>
+            <div>
+              <ng-template matStepLabel
+              >...select attestation(s) attributes
+              </ng-template
               >
-                <mat-icon>content_copy</mat-icon>
+              <vc-attribute-selection
+                *ngIf="selectedAttestations !== null"
+                [attestationsSelection]="selectedAttestations"
+                (attributesCollectedEvent)="
+                  handleAttributesCollectedEvent($event)
+                "
+              ></vc-attribute-selection>
+            </div>
+            <div class="button-container">
+              <button mat-raised-button matStepperPrevious>Back</button>
+              <button
+                mat-raised-button
+                matStepperNext
+                [disabled]="!attributesSelected()"
+              >
+                Next
               </button>
-              <span id="as-pre" *ngIf="canProceed()">{{
-                  initializationRequest | json
-                }}</span>
+            </div>
+          </mat-step>
 
-              <pre *ngIf="!canProceed()">..nothing prepared yet...</pre>
-            </mat-expansion-panel>
+          <mat-step>
+            <div style="padding-top: 10px">
+              <ng-template matStepLabel>...select presentation options and submit</ng-template>
 
-          </div>
-        </mat-step>
-      </form>
-    </mat-stepper>
+              <mat-tab-group (selectedTabChange)="handleRequestModeChange($event)">
+
+                <!-------------------------------------------------------------------->
+                <!-------------------------------------------------------------------->
+                <!----------------------- RESPONSE VIA REDIRECTS---------------------->
+                <!-------------------------------------------------------------------->
+                <!-------------------------------------------------------------------->
+
+
+                <mat-tab label="Submit with Redirects">
+
+                  <div class="presentation-options-container">
+                    <vc-presentation-options-redirects
+                      (optionsChanged)="handleRedirectsPresentationOptionsChangedEvent($event)"
+                    ></vc-presentation-options-redirects>
+                  </div>
+
+
+
+
+                </mat-tab>
+
+                <!-------------------------------------------------------------------->
+                <!-------------------------------------------------------------------->
+                <!------------------------ RESPONSE VIA DC API ----------------------->
+                <!-------------------------------------------------------------------->
+                <!-------------------------------------------------------------------->
+
+                <mat-tab label="Submit via DC API">
+
+                  <div class="presentation-options-container">
+                    <vc-presentation-options-dc-api
+                      (optionsChanged)="handleDcApiPresentationOptionsChangedEvent($event)"
+                    ></vc-presentation-options-dc-api>
+                  </div>
+
+
+                </mat-tab>
+
+              </mat-tab-group>
+
+              <vc-presentation-options-registration-certificate
+                (registrationCertificateOptionsChanged)="handleRegistrationCertificateOptionsChangedEvent($event)"
+              ></vc-presentation-options-registration-certificate>
+
+              <div class="button-container">
+                <button mat-raised-button matStepperPrevious type="button">
+                  Back
+                </button>
+                <button
+                  mat-raised-button
+                  matStepperNext
+                  type="button"
+                  (click)="proceedToInvokeWallet()"
+                  [disabled]="!canSubmit()"
+                >
+                  Submit
+                </button>
+              </div>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title
+                  ><span
+                  >Your presentation request so far...</span
+                  ></mat-panel-title
+                  >
+                </mat-expansion-panel-header>
+
+                <button
+                  mat-button
+                  matTooltip="Copy content"
+                  style="float: right"
+                  *ngIf="canProceed()"
+                  [cdkCopyToClipboard]="initializationRequest | json"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+                <span id="as-pre" *ngIf="canProceed()">{{
+                    initializationRequest | json
+                  }}</span>
+
+                <pre *ngIf="!canProceed()">..nothing prepared yet...</pre>
+              </mat-expansion-panel>
+
+            </div>
+          </mat-step>
+        </form>
+      </mat-stepper>
+    </details>
 
     <p>
       Or, if this doesn't work for you, go straight to defining your

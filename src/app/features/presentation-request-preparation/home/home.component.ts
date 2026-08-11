@@ -31,6 +31,9 @@ import {Subject} from 'rxjs';
 import {SessionStorageService} from '@app/core/services/session-storage.service';
 import {DefaultProfile, DefaultRequestUriMethod, ISSUER_CHAIN,} from '@app/core/constants/general';
 import {SUPPORTED_ATTESTATIONS} from '@app/core/constants/attestation-definitions';
+import {ATTESTATIONS_BY_FORMAT} from '@app/core/constants/attestations-per-format';
+import {AttestationType} from '@core/models/attestation/AttestationType';
+import {AttestationFormat} from '@core/models/attestation/AttestationFormat';
 import {PresentationOptionsRedirectsComponent, RedirectsPresentationOptionsChangedEvent} from '../components/presentation-options-redirects/presentation-options-redirects.component';
 import {DcApiPresentationOptionsChangedEvent, PresentationOptionsDcApiComponent} from '../components/presentation-options-dc-api/presentation-options-dc-api.component';
 import {PresentationOptionsRegistrationCertificateComponent, RegistrationCertificatePresentationOptionsChangedEvent} from '../components/presentation-options-registration-certificate/presentation-options-registration-certificate.component';
@@ -110,6 +113,61 @@ export class HomeComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  // --- Quick verify: one card per supported credential, requesting every
+  // attribute over the redirects/HAIP defaults - the same "pick one, go"
+  // shortcut the issuer's credential picker offers, for the common case of
+  // "just try the demo". The full step-by-step wizard below (attribute
+  // picking, format, DC API, registration certificate) still exists
+  // untouched inside "Advanced options" for anyone who needs it. ---
+
+  readonly quickAttestations = Object.values(SUPPORTED_ATTESTATIONS);
+  quickSelectedType: AttestationType | null = null;
+
+  // Same icon per credential as the issuer's own card picker (see its
+  // generate-credentials-offer-form.js) - one more thing that should look
+  // identical across the two apps, not just coincidentally similar.
+  private readonly QUICK_ICONS: Partial<Record<AttestationType, string>> = {
+    [AttestationType.PID]: '🪪',
+    [AttestationType.MDL]: '🚗',
+    [AttestationType.LEARNING_CREDENTIAL]: '🎓',
+    [AttestationType.EHIC]: '🩺',
+    [AttestationType.RESIDENCE_PERMIT]: '🏠',
+    [AttestationType.SCHUFA]: '💳',
+    [AttestationType.ARBEITSVERTRAG]: '💼',
+  };
+
+  iconFor(type: AttestationType): string {
+    return this.QUICK_ICONS[type] ?? '📄';
+  }
+
+  // Populated once the (always-mounted, just visually collapsed under
+  // Advanced options) registration-certificate picker auto-selects the
+  // first intended use on load - see handleRegistrationCertificateOptionsChangedEvent.
+  // Quick-select is disabled until then so it can never submit without one.
+  get commonOptionsReady(): boolean {
+    return Boolean(this.commonOptions.intendedUseId || this.commonOptions.registrationCertificate);
+  }
+
+  selectQuickAttestation(type: AttestationType) {
+    const format = ATTESTATIONS_BY_FORMAT[AttestationFormat.SD_JWT_VC]?.some(
+      (a) => a.attestationDef.type === type,
+    )
+      ? AttestationFormat.SD_JWT_VC
+      : AttestationFormat.MSO_MDOC;
+
+    this.quickSelectedType = type;
+    this.requestMode = 'redirects';
+    this.selectedAttestations = [
+      {type, format, attributeSelectionMethod: AttributeSelectionMethod.ALL_ATTRIBUTES},
+    ];
+    this.selectedAttributes = {};
+    this.initializationRequest = this.prepareRedirectsInitializationRequest(
+      this.selectedAttestations,
+      this.selectedAttributes,
+      this.redirectsOptions,
+    );
   }
 
   handleSelectionChangedEvent($event: AttestationSelection[]) {

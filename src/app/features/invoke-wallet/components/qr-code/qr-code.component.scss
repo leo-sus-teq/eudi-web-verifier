@@ -11,6 +11,61 @@
         margin: 1rem 0;
     }
 
+    // White frame so the QR code stays scannable against the dark page
+    // background - matches the issuer's .qr-code treatment.
+    .qr-frame {
+        display: inline-block;
+        max-width: 100%;
+        box-sizing: border-box;
+        background: #fff;
+        padding: 12px;
+        border-radius: 10px;
+
+        // angularx-qrcode's <qrcode> renders its own internal <canvas> with
+        // fixed width/height HTML attributes ([width]="300" in the template) -
+        // that doesn't shrink on its own on a narrow phone. ::ng-deep reaches
+        // through the child component's view encapsulation to let it scale
+        // down like a normal responsive image; the canvas still draws at its
+        // full 300x300 resolution, just displayed smaller, so it stays crisp.
+        ::ng-deep canvas {
+            max-width: 100%;
+            height: auto !important;
+            display: block;
+        }
+    }
+
+    // Wraps the "Or copy the link below" + raw URI in a native <details> so
+    // the long deep link doesn't sit in plain view by default - collapsed
+    // until someone actually wants to copy it. Full width so the <code>
+    // block below has room to wrap instead of overflowing this flex column.
+    .link-reveal {
+        width: 100%;
+    }
+
+    .copy-hint {
+        display: list-item;
+        color: temp.$textDarkSecondary;
+        margin: 0.75rem 0 0.25rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+    }
+
+    .link-reveal[open] .copy-hint {
+        margin-bottom: 0.5rem;
+    }
+
+    .deep-link-uri {
+        display: block;
+        max-width: 100%;
+        word-break: break-all;
+        background: #021529;
+        color: temp.$textDarkPrimary;
+        padding: 0.6rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        box-sizing: border-box;
+    }
+
     .vc-verifiable-credential {
         align-items: center;
         display: flex;
@@ -18,20 +73,26 @@
         min-width: temp.$min-body-width;
 
         .authorize {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           border: 0;
-          border-radius: 16px;
+          border-radius: 10px;
           color: hsl(0, 0%, 99%);
           cursor: pointer;
-          font-size: 16px;
-          height: 20px;
-          padding: 1rem;
-          transition: background 225ms ease-in-out 0s;
+          font-size: 0.95rem;
+          font-weight: 600;
+          padding: 0.85rem 1.5rem;
+          transition: background 150ms ease-in-out 0s;
           -webkit-user-select: none;
           user-select: none;
-          width: -moz-fit-content;
           width: fit-content;
           background: map.get(map.get(temp.$palette, color), primary);
           text-decoration: none;
+
+          &:hover {
+            background: #021529;
+          }
         }
 
         .body {
@@ -96,6 +157,18 @@
     @media (max-width: map.get(points.$breakpoints, md)) and (min-width: map.get(points.$breakpoints, sm)){
         .vc-verifiable-credential {
             width: temp.$body-width-md;
+        }
+    }
+
+    // Phone-width screens: none of the breakpoints above actually cover this
+    // (the min-width they fall back to, temp.$body-width-sm/19rem/304px, plus
+    // this card's own padding, is still wider than a 320-360px phone has room
+    // for). Placed last so it overrides them for this range specifically -
+    // nothing above changes for tablet/desktop.
+    @media (max-width: 400px) {
+        .vc-verifiable-credential {
+            min-width: 0;
+            width: 100%;
         }
     }
 }

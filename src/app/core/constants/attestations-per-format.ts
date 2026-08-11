@@ -1,5 +1,5 @@
 import {Attestation, MsoMdocAttestation, SdJwtVcAttestation} from "@core/models/attestation/Attestations";
-import {EHIC_ATTESTATION, MDL_ATTESTATION, PDA1_ATTESTATION, PHOTO_ID_ATTESTATION, PID_ATTESTATION, LEARNING_CREDENTIAL_ATTESTATION} from "@core/constants/attestation-definitions";
+import {ARBEITSVERTRAG_ATTESTATION, EHIC_ATTESTATION, MDL_ATTESTATION, PID_ATTESTATION, LEARNING_CREDENTIAL_ATTESTATION, RESIDENCE_PERMIT_ATTESTATION, SCHUFA_ATTESTATION} from "@core/constants/attestation-definitions";
 import {AttestationFormat} from "@core/models/attestation/AttestationFormat";
 import {AttestationType} from "@core/models/attestation/AttestationType";
 import {DataElement} from "@core/models/attestation/AttestationDefinition";
@@ -34,15 +34,6 @@ export const PID_SD_JWT_VC: SdJwtVcAttestation = {
   claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.PID) } }
 }
 
-/*---- PHOTO ID ATTESTATION INSTANCES PER FORMAT ----*/
-export const PHOTO_ID_MSO_MDOC: MsoMdocAttestation = {
-  format: AttestationFormat.MSO_MDOC,
-  attestationDef: PHOTO_ID_ATTESTATION,
-  doctype: 'org.iso.23220.2.photoid.1',
-  namespace: 'org.iso.23220.photoid.1',
-  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('org.iso.23220.photoid.1', attribute.identifier) }
-}
-
 /*---- EHIC INSTANCES PER FORMAT ----*/
 export const EHIC_MSO_MDOC: MsoMdocAttestation = {
   format: AttestationFormat.MSO_MDOC,
@@ -58,27 +49,53 @@ export const EHIC_SD_JWT_VC: SdJwtVcAttestation = {
   claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.EHIC) } }
 }
 
-/*---- PDA1 INSTANCES PER FORMAT ----*/
-export const PDA1_MSO_MDOC: MsoMdocAttestation = {
-  format: AttestationFormat.MSO_MDOC,
-  attestationDef: PDA1_ATTESTATION,
-  doctype: 'eu.europa.ec.eudi.pda1.1',
-  namespace: 'eu.europa.ec.eudi.pda1.1',
-  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('eu.europa.ec.eudi.pda1.1', attribute.identifier) }
-}
-export const PDA1_SD_JWT_VC: SdJwtVcAttestation = {
-  format: AttestationFormat.SD_JWT_VC,
-  attestationDef: PDA1_ATTESTATION,
-  vct: 'urn:eu.europa.ec.eudi:pda1:1',
-  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.PDA1) } }
-}
-
-/*---- LEARNING CREDENTIAL INSTANCES PER FORMAT ----*/
+/*---- LEARNING CREDENTIAL ("Diploma") INSTANCES PER FORMAT ----*/
 export const LEARNING_CREDENTIAL_SD_JWT_VC: SdJwtVcAttestation = {
   format: AttestationFormat.SD_JWT_VC,
   attestationDef: LEARNING_CREDENTIAL_ATTESTATION,
   vct: "urn:eu.europa.ec.eudi:learning:credential:1",
   claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.LEARNING_CREDENTIAL) } }
+}
+
+/*---- RESIDENCE PERMIT INSTANCES PER FORMAT ----*/
+// SD-JWT VC only: the issuer app doesn't offer an mdoc variant for this one
+// (see its generate-credentials-offer-form.html - only two checkboxes,
+// no format switch, unlike Schufa/Arbeitsvertrag below).
+export const RESIDENCE_PERMIT_SD_JWT_VC: SdJwtVcAttestation = {
+  format: AttestationFormat.SD_JWT_VC,
+  attestationDef: RESIDENCE_PERMIT_ATTESTATION,
+  vct: "urn:eudi:residence.permit:1",
+  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.RESIDENCE_PERMIT) } }
+}
+
+/*---- SCHUFA CREDIT REPORT INSTANCES PER FORMAT ----*/
+export const SCHUFA_MSO_MDOC: MsoMdocAttestation = {
+  format: AttestationFormat.MSO_MDOC,
+  attestationDef: SCHUFA_ATTESTATION,
+  doctype: 'eudi.schufa.1',
+  namespace: 'eudi.schufa.1',
+  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('eudi.schufa.1', attribute.identifier) }
+}
+export const SCHUFA_SD_JWT_VC: SdJwtVcAttestation = {
+  format: AttestationFormat.SD_JWT_VC,
+  attestationDef: SCHUFA_ATTESTATION,
+  vct: "urn:eudi:schufa:1",
+  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.SCHUFA) } }
+}
+
+/*---- EMPLOYMENT CERTIFICATE (ARBEITSVERTRAG) INSTANCES PER FORMAT ----*/
+export const ARBEITSVERTRAG_MSO_MDOC: MsoMdocAttestation = {
+  format: AttestationFormat.MSO_MDOC,
+  attestationDef: ARBEITSVERTRAG_ATTESTATION,
+  doctype: 'eudi.trusteq.arbeitsvertrag.1',
+  namespace: 'eudi.trusteq.arbeitsvertrag.1',
+  claimQuery: (attribute: DataElement) => { return msoMdocClaimQuery('eudi.trusteq.arbeitsvertrag.1', attribute.identifier) }
+}
+export const ARBEITSVERTRAG_SD_JWT_VC: SdJwtVcAttestation = {
+  format: AttestationFormat.SD_JWT_VC,
+  attestationDef: ARBEITSVERTRAG_ATTESTATION,
+  vct: "urn:eudi:trusteq.arbeitsvertrag:1",
+  claimQuery: (attribute: DataElement) => { return { path: sdJwtVcAttributeClaimQuery(attribute, AttestationType.ARBEITSVERTRAG) } }
 }
 
 function resolveAttribute(attribute: DataElement, attestationType: AttestationType): string {
@@ -133,9 +150,11 @@ export const PID_SD_JWT_VC_ATTRIBUTE_MAP: { [id: string]: string } = {
   "portrait": "picture"
 }
 
+// Kept in parity with the issuer's own credential set - see
+// attestation-definitions.ts's SUPPORTED_ATTESTATIONS comment.
 export const ATTESTATIONS_BY_FORMAT: { [id: string]: Attestation[] } = {
-  "mso_mdoc": [PID_MSO_MDOC, MDL_MSO_MDOC, PHOTO_ID_MSO_MDOC, EHIC_MSO_MDOC, PDA1_MSO_MDOC],
-  "dc+sd-jwt": [PID_SD_JWT_VC, EHIC_SD_JWT_VC, PDA1_SD_JWT_VC, LEARNING_CREDENTIAL_SD_JWT_VC]
+  "mso_mdoc": [PID_MSO_MDOC, MDL_MSO_MDOC, EHIC_MSO_MDOC, SCHUFA_MSO_MDOC, ARBEITSVERTRAG_MSO_MDOC],
+  "dc+sd-jwt": [PID_SD_JWT_VC, EHIC_SD_JWT_VC, LEARNING_CREDENTIAL_SD_JWT_VC, RESIDENCE_PERMIT_SD_JWT_VC, SCHUFA_SD_JWT_VC, ARBEITSVERTRAG_SD_JWT_VC]
 }
 
 export const getAttestationByFormatAndType =

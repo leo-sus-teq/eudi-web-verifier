@@ -74,45 +74,6 @@ export const MDL_ATTESTATION: AttestationDefinition = {
   ]
 }
 
-export const PHOTO_ID_ATTESTATION: AttestationDefinition = {
-  name: "Photo ID",
-  type: AttestationType.PHOTO_ID,
-  dataSet: [
-    { identifier: 'portrait', attribute: 'Portrait'},
-    { identifier: 'portrait_capture_date', attribute: 'Portrait capture date'},
-    { identifier: 'person_id', attribute: 'Person id'},
-    { identifier: 'family_name', attribute: 'Family name'},
-    { identifier: 'given_name', attribute: 'Given name'},
-    { identifier: 'birth_date', attribute: 'Birth date'},
-    { identifier: 'age_over_18', attribute: 'Age over 18'},
-    { identifier: 'age_over_NN', attribute: 'Age over NN'},
-    { identifier: 'age_in_years', attribute: 'Age in years'},
-    { identifier: 'age_birth_year', attribute: 'Age birth year'},
-    { identifier: 'family_name_birth', attribute: 'Family name birth'},
-    { identifier: 'given_name_birth', attribute: 'Given name birth'},
-    { identifier: 'birth_place', attribute: 'Birth place'},
-    { identifier: 'birth_country', attribute: 'Birth country'},
-    { identifier: 'birth_state', attribute: 'Birth state'},
-    { identifier: 'birth_city', attribute: 'Birth city'},
-    { identifier: 'resident_address', attribute: 'Resident address'},
-    { identifier: 'resident_country', attribute: 'Resident country'},
-    { identifier: 'resident_state', attribute: 'Resident state'},
-    { identifier: 'resident_city', attribute: 'Resident city'},
-    { identifier: 'resident_postal_code', attribute: 'Resident postal code'},
-    { identifier: 'resident_street', attribute: 'Resident street'},
-    { identifier: 'resident_house_number', attribute: 'Resident house number'},
-    { identifier: 'gender', attribute: 'Gender'},
-    { identifier: 'nationality', attribute: 'Nationality'},
-    { identifier: 'issuance_date', attribute: 'Issuance date'},
-    { identifier: 'expiry_date', attribute: 'Expiry date'},
-    { identifier: 'issuing_authority', attribute: 'Issuing authority'},
-    { identifier: 'document_number', attribute: 'Document number'},
-    { identifier: 'administrative_number', attribute: 'Administrative number'},
-    { identifier: 'issuing_country', attribute: 'Issuing country'},
-    { identifier: 'issuing_jurisdiction', attribute: 'Issuing jurisdiction'}
-  ]
-}
-
 export const EHIC_ATTESTATION: AttestationDefinition = {
   name: "European Health Insurance Card (EHIC)",
   type: AttestationType.EHIC,
@@ -127,24 +88,15 @@ export const EHIC_ATTESTATION: AttestationDefinition = {
   ],
 }
 
-export const PDA1_ATTESTATION: AttestationDefinition = {
-  name: "Portable Document A1 (PDA1)",
-  type: AttestationType.PDA1,
-  dataSet: [
-    { identifier: "credential_holder", attribute: "Credential holder" },
-    { identifier: 'social_security_pin', attribute: 'Social security PIN' },
-    { identifier: "nationality", attribute: "Nationality" },
-    { identifier: "employment_details", attribute: "Employment details" },
-    { identifier: 'places_of_work', attribute: 'Places of work' },
-    { identifier: 'legislation', attribute: 'Legislation' },
-    { identifier: 'status_confirmation', attribute: 'Status confirmation'},
-    { identifier: 'document_id', attribute: 'Document identifier'},
-    { identifier: "competent_institution", attribute: "Competent institution"},
-  ]
-}
-
+// Labeled "Diploma" (not the more general "Learning Credential" this type is
+// named for internally, see AttestationType.LEARNING_CREDENTIAL and its
+// special-cased claim-path handling in attestations-per-format.ts) to match
+// exactly what the issuer app calls this same credential (same vct,
+// urn:eu.europa.ec.eudi:learning:credential:1) in its own card picker - a
+// demo user going issuer -> wallet -> verifier should see one consistent
+// name for one credential, not two.
 export const LEARNING_CREDENTIAL_ATTESTATION: AttestationDefinition = {
-  name: "Learning Credential",
+  name: "Diploma",
   type: AttestationType.LEARNING_CREDENTIAL,
   dataSet: [
     {identifier: "issuing_authority", attribute: "Issuing Authority", selectivelyDisclosable: "never"},
@@ -167,11 +119,68 @@ export const LEARNING_CREDENTIAL_ATTESTATION: AttestationDefinition = {
   ]
 }
 
+// The following three match eudi-srv-pid-issuer's custom demo credentials
+// exactly (same vct + claim names as its ResidencePermitClaims.kt /
+// SdJwtVcSchufaClaims.kt / SdJwtVcArbeitsvertragClaims.kt) - added so this
+// app can request everything the issuer can actually issue, not just the
+// generic EU reference set (PID/mDL/EHIC/Diploma) this app originally shipped
+// with.
+
+export const RESIDENCE_PERMIT_ATTESTATION: AttestationDefinition = {
+  name: "Residence Permit",
+  type: AttestationType.RESIDENCE_PERMIT,
+  dataSet: [
+    { identifier: 'family_name', attribute: 'Family name' },
+    { identifier: 'given_name', attribute: 'Given name' },
+    { identifier: 'birth_date', attribute: 'Birthdate' },
+    { identifier: 'nationality', attribute: 'Nationality' },
+    { identifier: 'document_number', attribute: 'Document number' },
+    { identifier: 'administrative_number', attribute: 'Administrative number' },
+    { identifier: 'issuing_authority', attribute: 'Issuing authority' },
+    { identifier: 'issuing_country', attribute: 'Issuing country' },
+    { identifier: 'date_of_issuance', attribute: 'Date of issuance' },
+    { identifier: 'date_of_expiry', attribute: 'Date of expiry' },
+    { identifier: 'resident_address', attribute: 'Resident address' },
+  ]
+}
+
+export const SCHUFA_ATTESTATION: AttestationDefinition = {
+  name: "Schufa Credit Report",
+  type: AttestationType.SCHUFA,
+  dataSet: [
+    { identifier: 'family_name', attribute: 'Family name' },
+    { identifier: 'given_name', attribute: 'Given name' },
+    { identifier: 'birth_date', attribute: 'Birthdate' },
+    { identifier: 'credit_score', attribute: 'Credit score' },
+    { identifier: 'report_date', attribute: 'Report date' },
+    { identifier: 'valid_until', attribute: 'Valid until' },
+    { identifier: 'issuing_entity', attribute: 'Issuing entity' },
+  ]
+}
+
+export const ARBEITSVERTRAG_ATTESTATION: AttestationDefinition = {
+  name: "Employment Certificate (TRUSTEQ)",
+  type: AttestationType.ARBEITSVERTRAG,
+  dataSet: [
+    { identifier: 'employee_family_name', attribute: 'Employee family name' },
+    { identifier: 'employee_given_name', attribute: 'Employee given name' },
+    { identifier: 'job_title', attribute: 'Job title' },
+    { identifier: 'employment_start_date', attribute: 'Employment start date' },
+    { identifier: 'employer', attribute: 'Employer' },
+    { identifier: 'contract_type', attribute: 'Contract type' },
+    { identifier: 'department', attribute: 'Department' },
+  ]
+}
+
+// Order matches the issuer's own credential-card picker exactly (see its
+// generate-credentials-offer-form.html), so the two apps' card grids read as
+// the same menu, not two different ones.
 export const SUPPORTED_ATTESTATIONS: { [id: string]: AttestationDefinition } = {
   "pid": PID_ATTESTATION,
   "mdl": MDL_ATTESTATION,
-  "photo_id": PHOTO_ID_ATTESTATION,
-  "ehic": EHIC_ATTESTATION,
-  "pda1": PDA1_ATTESTATION,
   "learning_credential": LEARNING_CREDENTIAL_ATTESTATION,
+  "ehic": EHIC_ATTESTATION,
+  "residence_permit": RESIDENCE_PERMIT_ATTESTATION,
+  "schufa": SCHUFA_ATTESTATION,
+  "arbeitsvertrag": ARBEITSVERTRAG_ATTESTATION,
 }

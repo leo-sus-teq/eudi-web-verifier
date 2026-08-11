@@ -6,9 +6,16 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- Detects being shown inside the demo dashboard's iframe (see
+       ../../dashboard/) and hides <vc-wallet-layout-header> globally (see
+       styles.scss) - not a query param the framer has to remember, any
+       framing triggers it, which is fine since nothing else legitimately
+       frames this app. One script here covers every route, since this is
+       the SPA's single entry point. -->
+  <script>
+    if (window.self !== window.top) { document.documentElement.classList.add('is-embedded'); }
+  </script>
 </head>
 <body class="mat-typography">
   <vc-root></vc-root>
