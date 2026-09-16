@@ -1,0 +1,260 @@
+{
+  "actions": {
+    "back": "Back",
+    "close": "Close",
+    "copyContent": "Copy content",
+    "loading": "Loading...",
+    "next": "Next",
+    "save": "Save"
+  },
+  "attestationSelection": {
+    "allAttributes": "All attributes",
+    "attributesByLabel": "-- attributes by --",
+    "chooseFormatError": "Please choose a format",
+    "chooseMethodError": "Please choose a method",
+    "formatLabel": "-- format --",
+    "specificAttributes": "Specific attributes"
+  },
+  "attestations": {
+    "arbeitsvertrag": {
+      "_name": "Employment Certificate (TRUSTEQ)",
+      "contract_type": "Contract type",
+      "department": "Department",
+      "employee_family_name": "Employee family name",
+      "employee_given_name": "Employee given name",
+      "employer": "Employer",
+      "employment_start_date": "Employment start date",
+      "job_title": "Job title"
+    },
+    "ehic": {
+      "_name": "European Health Insurance Card (EHIC)",
+      "competent_institution": "Competent institution",
+      "credential_holder": "Credential holder",
+      "document_id": "Document identifier",
+      "ending_date": "Ending date",
+      "social_security_pin": "Social security PIN",
+      "starting_date": "Starting date",
+      "subject": "Subject"
+    },
+    "learning_credential": {
+      "_name": "Diploma",
+      "achievement_title": "Achievement Title",
+      "assessment_grade": "Assessment Grade",
+      "date_of_issuance": "Date of Issuance",
+      "expected_study_time": "Expected study time",
+      "family_name": "Family Name(s)",
+      "given_name": "Given Name(s)",
+      "integration_stackability_options": "Integration or Stackability options",
+      "issuing_authority": "Issuing Authority",
+      "issuing_country": "Issuing Country",
+      "language_of_classes": "Language of classes",
+      "learner_identification": "Learner identification",
+      "learning_outcomes": "Learning Outcomes",
+      "level_of_learning_experience": "Level of learning experience",
+      "prerequisites_to_enroll": "Prerequisites to enroll",
+      "types_of_quality_assurance": "Types of quality assurance"
+    },
+    "mdl": {
+      "_name": "Mobile Driving Licence (MDL)",
+      "administrative_number": "Administrative number",
+      "age_birth_year": "Age birth year",
+      "age_in_years": "Age in years",
+      "age_over_18": "Age over 18",
+      "age_over_21": "Age over 21",
+      "birth_date": "Birthdate",
+      "birth_place": "Birth place",
+      "document_number": "Document number",
+      "driving_privileges": "Driving privileges",
+      "expiry_date": "Expiry date",
+      "eye_colour": "Eye colour",
+      "family_name": "Family name",
+      "family_name_national_character": "Family name national character",
+      "given_name": "Given name",
+      "given_name_national_character": "Given name national character",
+      "hair_colour": "Hair colour",
+      "height": "Height",
+      "issue_date": "Issue date",
+      "issuing_authority": "Issuing authority",
+      "issuing_country": "Issuing country",
+      "issuing_jurisdiction": "Issuing jurisdiction",
+      "nationality": "Nationality",
+      "portrait": "Portrait",
+      "portrait_capture_date": "Portrait capture date",
+      "resident_address": "Resident address",
+      "resident_city": "Resident city",
+      "resident_country": "Resident country",
+      "resident_postal_code": "Resident postal code",
+      "resident_state": "Resident state",
+      "sex": "Sex",
+      "signature_usual_mark": "Signature usual mark",
+      "un_distinguishing_sign": "Un-distinguishing sign",
+      "weight": "Weight"
+    },
+    "pid": {
+      "_name": "Person Identification Data (PID)",
+      "birth_date": "Birthdate",
+      "document_number": "Document number",
+      "email_address": "Email address",
+      "expiry_date": "Expiry date",
+      "family_name": "Family name",
+      "family_name_birth": "Family name birth",
+      "given_name": "Given name",
+      "given_name_birth": "Given name birth",
+      "issuance_date": "Issuance date",
+      "issuing_authority": "Issuing authority",
+      "issuing_country": "Issuing country",
+      "issuing_jurisdiction": "Issuing jurisdiction",
+      "mobile_phone_number": "Mobile phone number",
+      "nationality": "Nationality",
+      "personal_administrative_number": "Personal administrative number",
+      "place_of_birth": "Birth place",
+      "portrait": "Portrait",
+      "resident_address": "Resident address",
+      "resident_city": "Resident city",
+      "resident_country": "Resident country",
+      "resident_house_number": "Resident house number",
+      "resident_postal_code": "Resident postal code",
+      "resident_state": "Resident state",
+      "resident_street": "Resident street",
+      "sex": "Sex",
+      "trust_anchor": "Trust anchor"
+    },
+    "residence_permit": {
+      "_name": "Residence Permit",
+      "administrative_number": "Administrative number",
+      "birth_date": "Birthdate",
+      "date_of_expiry": "Date of expiry",
+      "date_of_issuance": "Date of issuance",
+      "document_number": "Document number",
+      "family_name": "Family name",
+      "given_name": "Given name",
+      "issuing_authority": "Issuing authority",
+      "issuing_country": "Issuing country",
+      "nationality": "Nationality",
+      "resident_address": "Resident address"
+    },
+    "schufa": {
+      "_name": "Schufa Credit Report",
+      "birth_date": "Birthdate",
+      "credit_score": "Credit score",
+      "family_name": "Family name",
+      "given_name": "Given name",
+      "issuing_entity": "Issuing entity",
+      "report_date": "Report date",
+      "valid_until": "Valid until"
+    }
+  },
+  "attributeSelection": {
+    "allAttributesSelected": "All Attributes selected",
+    "selectAttributesBtn": "Select Attributes"
+  },
+  "customRequest": {
+    "channelRedirects": "Redirects",
+    "chooseChannel": "Choose the request submission channel",
+    "editorTitle": "Initialize presentation request",
+    "invalidJson": "Invalid JSON Format",
+    "submissionMethod": "Submission Method"
+  },
+  "dcApi": {
+    "errorOccurred": "An error occurred",
+    "protocolNotSupported": "Protocol {{protocol}} is not supported by the user agent",
+    "title": "Triggering Wallet via DC API",
+    "unknownError": "An unknown error occurred while invoking the wallet."
+  },
+  "header": {
+    "configureIssuerChain": "Configure issuer chain",
+    "inspectLogs": "Inspect transaction logs",
+    "menu": "menu",
+    "viewTransactionLogs": "View transaction logs"
+  },
+  "home": {
+    "advancedSummary": "Advanced: customize attributes, format, and submission options",
+    "customRequestHintLink": "here",
+    "customRequestHintPrefix": "Or, if this doesn't work for you, go straight to defining your presentation request",
+    "intro": "Pick a credential below, then scan the QR code with your EUDI Wallet app to verify it.",
+    "nothingPreparedYet": "..nothing prepared yet...",
+    "requestSoFarTitle": "Your presentation request so far...",
+    "step1Label": "... select attestation(s)",
+    "step2Label": "...select attestation(s) attributes",
+    "step3Label": "...select presentation options and submit",
+    "submitBtn": "Submit",
+    "tabDcApi": "Submit via DC API",
+    "tabRedirects": "Submit with Redirects",
+    "title": "Verify a credential",
+    "verifyBtn": "Verify"
+  },
+  "invokeWallet": {
+    "title": "Invoke Wallet"
+  },
+  "issuerChain": {
+    "clearBtn": "Clear",
+    "clearedNote": "This value is cleared at the end of each session.",
+    "fieldLabel": "Issuer certificate chain",
+    "intro": "Configure a trusted issuer certificate chain. The verifier will use this certificate chain to validate the issuer's certificate, bypassing any other configured trust. The certificate chain should be in PEM format and should include the <i>-----BEGIN CERTIFICATE-----</i> and <i>-----END CERTIFICATE-----</i> markers.",
+    "invalidFormatError": "Invalid certificate chain format. Please provide a valid certificate chain.",
+    "title": "Configure Trusted Issuer Certificate Chain"
+  },
+  "layout": {
+    "compatibleWith": "This verifier is compatible with"
+  },
+  "openLogs": {
+    "defaultLabel": "Show Logs",
+    "transactionId": "Transaction ID",
+    "transactionIdPlaceholder": "type a transaction ID"
+  },
+  "presentationOptions": {
+    "authEndpointHelper": "Specify an endpoint URI for the authorization request",
+    "authEndpointLabel": "Authorization Endpoint",
+    "copyRegCert": "Copy registration certificate",
+    "copyRegCertAriaLabel": "Copy registration certificate to clipboard",
+    "dcApiUnsupported": "DC API is not supported by the current user agent.",
+    "expectedOrigins": "Expected origins",
+    "expectedOriginsHelper": "Comma-separated list of expected origin values for the DC API request",
+    "intendedUseHelper": "Specifies the intended use of the presentation request",
+    "intendedUseLabel": "Intended Use",
+    "noneOption": "-- None --",
+    "postOrGet": "POST or GET",
+    "profileHelper": "Defines the rules and constraints of the presentation",
+    "profileLabel": "Presentation Profile",
+    "regCertHelper": "Optional certificate (in JWT format) to be included in the presentation request",
+    "regCertLabel": "Registration Certificate",
+    "regCertPlaceholder": "Enter registration certificate",
+    "regCertWillBeUsed": "This registration certificate will be used for the presentation",
+    "requestUriMethodHelper": "Choose how the wallet fetches the authorization request",
+    "requestUriMethodLabel": "Request URI Method",
+    "rulesDefinedBy": "The presentations follow the rules defined by",
+    "subtitle": "Configure the options for your presentation request.",
+    "title": "Presentation Options"
+  },
+  "qrCode": {
+    "ariaLabel": "QR Code image with the following content...",
+    "copyLinkBelow": "Or copy the link below",
+    "downloadAsImage": "download as image",
+    "openWithWalletBtn": "OPEN WITH YOUR WALLET",
+    "orSeparator": "- OR -",
+    "qrCodeLinkText": "QR code",
+    "scanPrefix": "Scan the",
+    "scanSuffix": "above with your phone"
+  },
+  "results": {
+    "documentsCountSuffix": "documents",
+    "errorPrefix": "Error:",
+    "forQuery": "for query",
+    "formatLabel": "in {{format}} format",
+    "requestedFor": "You requested for...",
+    "transactionLogLink": "transaction log",
+    "viewContentBtn": "View Content",
+    "walletResponded": "...and wallet responded with the following documents ..."
+  },
+  "selectableAttributes": {
+    "intro": "Select attributes of the attestation to be included in the request",
+    "selectBtn": "Select"
+  },
+  "viewAttestation": {
+    "attributesTab": "Attributes",
+    "metadataTab": "Metadata"
+  },
+  "walletResponse": {
+    "decodeErrorTitle": "Error decoding document in {{format}}"
+  }
+}

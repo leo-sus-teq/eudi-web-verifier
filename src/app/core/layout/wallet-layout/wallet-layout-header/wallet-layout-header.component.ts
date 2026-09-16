@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { OpenLogsComponent } from "@shared/elements/open-logs/open-logs.component";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { IssuerChainComponent } from '@app/shared/elements/trusted-issuer/issuer-chain.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'vc-wallet-layout-header',
@@ -16,7 +17,8 @@ import { IssuerChainComponent } from '@app/shared/elements/trusted-issuer/issuer
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
-        MatDialogModule
+        MatDialogModule,
+        TranslatePipe
     ],
     styleUrls: ['./wallet-layout-header.component.scss']
 })
@@ -33,7 +35,7 @@ export class WalletLayoutHeaderComponent {
     this.dialog.open(OpenLogsComponent, {
       data: {
         transactionId: '',
-        label: 'Inspect transaction logs',
+        label: 'header.inspectLogs',
         isInspectLogs: true
       },
     });

@@ -34,7 +34,7 @@ import {VerifierEndpointService} from "@core/services/verifier-endpoint.service"
 export class OpenLogsComponent implements OnInit {
 	readonly data = inject<LogData>(MAT_DIALOG_DATA);
 	transactionId!: string;
-	label = 'Show Logs';
+	label = 'openLogs.defaultLabel';
 	isInspectLogs = false;
 	schemeControl = new FormControl('', [Validators.required]);
 	matcher = new ErrorStateMatcher();

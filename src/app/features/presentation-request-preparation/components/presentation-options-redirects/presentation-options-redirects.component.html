@@ -1,8 +1,8 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Presentation Options</mat-card-title>
+    <mat-card-title>{{ 'presentationOptions.title' | translate }}</mat-card-title>
     <mat-card-subtitle>
-      Configure the options for your presentation request.
+      {{ 'presentationOptions.subtitle' | translate }}
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -10,16 +10,16 @@
     <div class="request-options-grid">
       <div class="request-options-row">
         <div class="request-options-label">
-          <span>Presentation Profile</span>
+          <span>{{ 'presentationOptions.profileLabel' | translate }}</span>
           <p class="request-options-helper">
-            Defines the rules and constraints of the presentation
+            {{ 'presentationOptions.profileHelper' | translate }}
           </p>
         </div>
         <div class="request-options-control">
           <mat-button-toggle-group
             [formControl]="presentationProfileControl"
             (valueChange)="handlePresentationProfileChange($event)"
-            aria-label="Presentation Profile"
+            [attr.aria-label]="'presentationOptions.profileLabel' | translate"
           >
           <mat-button-toggle value="haip">HAIP</mat-button-toggle>
             <mat-button-toggle value="openid4vp">OpenID4VP</mat-button-toggle>
@@ -29,34 +29,34 @@
 
       <div class="request-options-row">
         <div class="request-options-label">
-          <span>Request URI Method</span>
+          <span>{{ 'presentationOptions.requestUriMethodLabel' | translate }}</span>
           <p class="request-options-helper">
-            Choose how the wallet fetches the authorization request
+            {{ 'presentationOptions.requestUriMethodHelper' | translate }}
           </p>
         </div>
         <div class="request-options-control">
           <mat-button-toggle-group
             [formControl]="requestUriMethodControl"
             (valueChange)="handleRequestUriMethodChange($event)"
-            aria-label="Request URI Method"
+            [attr.aria-label]="'presentationOptions.requestUriMethodLabel' | translate"
           >
             <mat-button-toggle value="get">GET</mat-button-toggle>
             <mat-button-toggle value="post">POST</mat-button-toggle>
-            <mat-button-toggle value="post_get">POST or GET</mat-button-toggle>
+            <mat-button-toggle value="post_get">{{ 'presentationOptions.postOrGet' | translate }}</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </div>
 
       <div class="request-options-row">
         <div class="request-options-label">
-          <span>Authorization Endpoint</span>
+          <span>{{ 'presentationOptions.authEndpointLabel' | translate }}</span>
           <p class="request-options-helper">
-            Specify an endpoint URI for the authorization request
+            {{ 'presentationOptions.authEndpointHelper' | translate }}
           </p>
         </div>
         <div class="request-options-control">
           <mat-form-field class="config-option-field">
-            <mat-label>Authorization Endpoint</mat-label>
+            <mat-label>{{ 'presentationOptions.authEndpointLabel' | translate }}</mat-label>
             <input
               matInput
               placeholder="scheme://"

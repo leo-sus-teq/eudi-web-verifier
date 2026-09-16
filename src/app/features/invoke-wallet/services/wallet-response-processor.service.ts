@@ -6,12 +6,14 @@ import { DecodersRegistryService } from '@core/services/decoders-registry.servic
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class WalletResponseProcessorService {
   constructor(
     private readonly decoders: DecodersRegistryService,
-    private readonly toastrService: ToastrService
+    private readonly toastrService: ToastrService,
+    private readonly translate: TranslateService
   ) {}
 
   mapVpTokenToAttestations(
@@ -69,7 +71,7 @@ export class WalletResponseProcessorService {
       catchError((error) => {
         this.toastrService.error(
           error.error,
-          `Error decoding document in ${format}`
+          this.translate.instant('walletResponse.decodeErrorTitle', { format })
         );
         return of({
           kind: 'error' as const,

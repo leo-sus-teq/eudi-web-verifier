@@ -7,7 +7,7 @@
             <qrcode
               [qrdata]="deepLinkTxt"
               [allowEmptyString]="false"
-              [ariaLabel]="'QR Code image with the following content...'"
+              [ariaLabel]="'qrCode.ariaLabel' | translate"
               [cssClass]="'center'"
               [elementType]="'canvas'"
               [errorCorrectionLevel]="'L'"
@@ -22,22 +22,22 @@
         <mat-divider *ngIf="isCrossDevice" />
         <div class="below-qr-code">
           <span *ngIf="isCrossDevice"
-            >Scan the
+            >{{ 'qrCode.scanPrefix' | translate }}
             <a
               [href]="qrCodeDownloadLink"
               download="qrcode"
-              title="download as image"
-              >QR code</a
+              [title]="'qrCode.downloadAsImage' | translate"
+              >{{ 'qrCode.qrCodeLinkText' | translate }}</a
             >
-            above with your phone
+            {{ 'qrCode.scanSuffix' | translate }}
           </span>
-          <p *ngIf="isCrossDevice">- OR -</p>
+          <p *ngIf="isCrossDevice">{{ 'qrCode.orSeparator' | translate }}</p>
           <a mat-raised-button class="authorize" [href]="deepLinkTxt"
-            >OPEN WITH YOUR WALLET</a
+            >{{ 'qrCode.openWithWalletBtn' | translate }}</a
           >
 
           <details class="link-reveal">
-            <summary class="copy-hint">Or copy the link below</summary>
+            <summary class="copy-hint">{{ 'qrCode.copyLinkBelow' | translate }}</summary>
             <code class="deep-link-uri">{{ deepLinkTxt }}</code>
           </details>
         </div>
@@ -45,7 +45,7 @@
         <mat-divider />
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="openLogs()">View transaction logs</button>
+        <button mat-button (click)="openLogs()">{{ 'header.viewTransactionLogs' | translate }}</button>
       </mat-card-actions>
       <mat-card-footer>
         <mat-progress-bar *ngIf="isCrossDevice" mode="indeterminate" />

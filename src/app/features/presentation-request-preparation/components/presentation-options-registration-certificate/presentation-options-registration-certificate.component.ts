@@ -11,6 +11,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { VerifierEndpointService } from '@app/core/services/verifier-endpoint.service';
 import { IntendedUse } from '@app/core/models/IntendedUse';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'vc-presentation-options-registration-certificate',
@@ -25,6 +26,7 @@ import { IntendedUse } from '@app/core/models/IntendedUse';
     MatIconModule,
     MatTooltipModule,
     ClipboardModule,
+    TranslatePipe,
   ],
   templateUrl: './presentation-options-registration-certificate.component.html',
   styleUrl: './presentation-options-registration-certificate.component.scss',

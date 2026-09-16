@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormSelectableField } from '@app/core/models/FormSelectableField';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recursive-checkbox',
@@ -10,6 +11,7 @@ import { FormSelectableField } from '@app/core/models/FormSelectableField';
     imports: [
       CommonModule,
       MatCheckboxModule,
+      TranslatePipe,
     ]
 })
 export class RecursiveCheckboxComponent {

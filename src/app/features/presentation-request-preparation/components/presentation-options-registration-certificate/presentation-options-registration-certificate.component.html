@@ -1,25 +1,25 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title><span>Registration Certificate</span></mat-panel-title>
+    <mat-panel-title><span>{{ 'presentationOptions.regCertLabel' | translate }}</span></mat-panel-title>
   </mat-expansion-panel-header>
 
   <div class="request-options-grid">
     <div class="request-options-row">
       <div class="request-options-label">
-        <span>Intended Use</span>
+        <span>{{ 'presentationOptions.intendedUseLabel' | translate }}</span>
         <p class="request-options-helper">
-          Specifies the intended use of the presentation request
+          {{ 'presentationOptions.intendedUseHelper' | translate }}
         </p>
       </div>
       <div class="request-options-control">
         <mat-form-field class="config-option-field">
-          <mat-label>Intended Use</mat-label>
+          <mat-label>{{ 'presentationOptions.intendedUseLabel' | translate }}</mat-label>
           <mat-select
             matNativeControl
             [formControl]="intendedUseControl"
             (selectionChange)="onIntendedUseSelectionChange($event)"
           >
-            <mat-option [value]="null">-- None --</mat-option>
+            <mat-option [value]="null">{{ 'presentationOptions.noneOption' | translate }}</mat-option>
             <mat-option
               *ngFor="let use of intendedUses"
               [value]="use.intended_use_id"
@@ -34,7 +34,7 @@
     <div class="request-options-row" *ngIf="selectedIntendedUse">
       <div class="request-options-label">
         <p class="request-options-helper">
-          This registration certificate will be used for the presentation
+          {{ 'presentationOptions.regCertWillBeUsed' | translate }}
         </p>
       </div>
       <div class="request-options-control">
@@ -44,9 +44,9 @@
           </span>
           <button
             mat-icon-button
-            matTooltip="Copy registration certificate"
+            [matTooltip]="'presentationOptions.copyRegCert' | translate"
             [cdkCopyToClipboard]="selectedIntendedUse.registration_certificate"
-            aria-label="Copy registration certificate to clipboard"
+            [attr.aria-label]="'presentationOptions.copyRegCertAriaLabel' | translate"
           >
             <mat-icon>content_copy</mat-icon>
           </button>
@@ -56,17 +56,17 @@
 
     <div class="request-options-row">
       <div class="request-options-label">
-        <span>Registration Certificate</span>
+        <span>{{ 'presentationOptions.regCertLabel' | translate }}</span>
         <p class="request-options-helper">
-          Optional certificate (in JWT format) to be included in the presentation request
+          {{ 'presentationOptions.regCertHelper' | translate }}
         </p>
       </div>
       <div class="request-options-control">
         <mat-form-field class="config-option-field">
-          <mat-label>Registration Certificate</mat-label>
+          <mat-label>{{ 'presentationOptions.regCertLabel' | translate }}</mat-label>
           <input
             matInput
-            placeholder="Enter registration certificate"
+            [placeholder]="'presentationOptions.regCertPlaceholder' | translate"
             [formControl]="registrationCertificateControl"
             autocomplete="off"
             (input)="onRegistrationCertificateInput($event)"

@@ -5,7 +5,7 @@
     [checked]="isCheckedFn(field.value)"
     [disabled]="field.alwaysDisclosed"
   >
-    {{ field.label }}
+    {{ field.label | translate }}
   </mat-checkbox>
 
   <div *ngIf="field.nested?.length" class="nested-fields">

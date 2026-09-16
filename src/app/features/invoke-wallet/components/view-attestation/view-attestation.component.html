@@ -2,7 +2,7 @@
 
 <mat-dialog-content class="mat-typography">
   <mat-tab-group>
-    <mat-tab label="Attributes">
+    <mat-tab [label]="'viewAttestation.attributesTab' | translate">
       <!-- Main attribute list -->
       <mat-list>
         <ng-container *ngFor="let option of attestation.attributes; trackBy: trackByFn">
@@ -60,7 +60,7 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab *ngIf="attestation.metadata && attestation.metadata.length > 0" label="Metadata">
+    <mat-tab *ngIf="attestation.metadata && attestation.metadata.length > 0" [label]="'viewAttestation.metadataTab' | translate">
       <mat-list>
         <mat-list-item *ngFor="let option of attestation.metadata">
           <span matListItemTitle>
@@ -78,5 +78,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions  align="end">
-  <button mat-stroked-button mat-dialog-close>Close</button>
+  <button mat-stroked-button mat-dialog-close>{{ 'actions.close' | translate }}</button>
 </mat-dialog-actions>

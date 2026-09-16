@@ -17,6 +17,7 @@ import {
   DefaultDCApiPresentationOptions,
 } from '@app/core/models/TransactionInitializationRequest';
 import { isDCApiSupported } from '@shared/utils/dc-api-utils';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'vc-presentation-options-dc-api',
@@ -31,6 +32,7 @@ import { isDCApiSupported } from '@shared/utils/dc-api-utils';
     MatCardTitle,
     MatCardSubtitle,
     MatCardContent,
+    TranslatePipe,
   ],
   templateUrl: './presentation-options-dc-api.component.html',
   styleUrl: './presentation-options-dc-api.component.scss',

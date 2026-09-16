@@ -2,55 +2,49 @@
   <div class="result-container">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>You requested for...</mat-panel-title>
+        <mat-panel-title>{{ 'results.requestedFor' | translate }}</mat-panel-title>
       </mat-expansion-panel-header>
       <vc-editor [editable]="false" [code]="presentationQuery"></vc-editor>
     </mat-expansion-panel>
 
     <div class="documents-and-log">
-      <span>...and wallet responded with the following documents ...</span>
-      <a mat-button (click)="openLogs()">transaction log</a>
+      <span>{{ 'results.walletResponded' | translate }}</span>
+      <a mat-button (click)="openLogs()">{{ 'results.transactionLogLink' | translate }}</a>
     </div>
 
     <ng-container *ngFor="let entry of attestationsPerQuery | keyvalue">
       <mat-expansion-panel expanded="true">
         <mat-expansion-panel-header>
-          <mat-panel-title><span>for query <strong>{{ entry.key }}</strong>:</span>
+          <mat-panel-title><span>{{ 'results.forQuery' | translate }} <strong>{{ entry.key }}</strong>:</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <ng-container *ngIf="entry.value | async as attestations">
           <div>
-            <strong>{{ attestations.length }}</strong> documents
+            <strong>{{ attestations.length }}</strong> {{ 'results.documentsCountSuffix' | translate }}
           </div>
           <div class="result-container">
             <ng-container *ngFor="let attestation of attestations">
               <mat-card *ngIf="isErrored(attestation)" appearance="outlined">
                 <mat-card-header>
                   <mat-card-title
-                    >Error: {{ attestation.reason }}</mat-card-title
+                    >{{ 'results.errorPrefix' | translate }} {{ attestation.reason }}</mat-card-title
                   >
-                  <mat-card-subtitle>
-                    in
-                    <i> {{ attestation.format }} </i> format</mat-card-subtitle
-                  >
+                  <mat-card-subtitle>{{ 'results.formatLabel' | translate: { format: attestation.format } }}</mat-card-subtitle>
                 </mat-card-header>
               </mat-card>
 
               <mat-card *ngIf="!isErrored(attestation)" appearance="outlined">
                 <mat-card-header>
                   <mat-card-title>{{ attestation.name }}</mat-card-title>
-                  <mat-card-subtitle>
-                    in
-                    <i> {{ attestation.format }} </i> format</mat-card-subtitle
-                  >
+                  <mat-card-subtitle>{{ 'results.formatLabel' | translate: { format: attestation.format } }}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-actions align="end">
                   <button
                     mat-stroked-button
                     (click)="viewContents(attestation)"
                   >
-                    View Content
+                    {{ 'results.viewContentBtn' | translate }}
                   </button>
                 </mat-card-actions>
               </mat-card>

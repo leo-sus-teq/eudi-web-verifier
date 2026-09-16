@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardHeader, MatCardSubtitle, MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { Profile, profileOptions, RedirectsPresentationOptions, RequestUriMethod } from '@app/core/models/TransactionInitializationRequest';
 import { DefaultProfile, DefaultRequestUriMethod } from '@app/core/constants/general';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'vc-presentation-options-redirects',
@@ -20,7 +21,8 @@ import { DefaultProfile, DefaultRequestUriMethod } from '@app/core/constants/gen
     MatCard,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardContent
+    MatCardContent,
+    TranslatePipe
 ],
   templateUrl: './presentation-options-redirects.component.html',
   styleUrl: './presentation-options-redirects.component.scss',

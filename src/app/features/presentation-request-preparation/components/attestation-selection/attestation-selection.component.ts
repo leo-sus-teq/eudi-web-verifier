@@ -13,6 +13,7 @@ import {AttestationDefinition} from "@core/models/attestation/AttestationDefinit
 import {ATTESTATIONS_BY_FORMAT} from "@core/constants/attestations-per-format";
 import {Attestation} from "@core/models/attestation/Attestations";
 import {AttestationType} from "@core/models/attestation/AttestationType";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'vc-attestation-selection',
@@ -41,6 +42,7 @@ export class AttestationSelectionComponent implements OnInit {
   selectedMethod: AttributeSelectionMethod | null = null;
   selectedFormat: AttestationFormat | null = null;
 
+  constructor(private readonly translate: TranslateService) {}
 
   ngOnInit(): void {
     this.supportedFormats = this.formatOptions()
@@ -48,9 +50,9 @@ export class AttestationSelectionComponent implements OnInit {
 
   labelOf(method: AttributeSelectionMethod): string {
     if (method == AttributeSelectionMethod.ALL_ATTRIBUTES) {
-      return "All attributes";
+      return this.translate.instant('attestationSelection.allAttributes');
     } else {
-      return "Specific attributes";
+      return this.translate.instant('attestationSelection.specificAttributes');
     }
   }
 

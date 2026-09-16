@@ -3,7 +3,7 @@ import { BodyAction } from '@shared/elements/body-actions/models/BodyAction';
 
 export const HOME_ACTIONS: BodyAction[] = [
 	{
-		label: 'Next',
+		label: 'actions.next',
 		id: 'next_button',
 		disabled: true,
 		mode: 'none',
@@ -14,7 +14,7 @@ export const HOME_ACTIONS: BodyAction[] = [
 ];
 export const SELECTABLE_ACTIONS: BodyAction[] = [
 	{
-		label: 'Next',
+		label: 'actions.next',
 		id: 'next_button',
 		disabled: false,
 		mode: 'none',
@@ -23,7 +23,7 @@ export const SELECTABLE_ACTIONS: BodyAction[] = [
 		code: ActionCode.NEXT
 	},
 	{
-		label: 'Back',
+		label: 'actions.back',
 		id: 'back_button',
 		disabled: false,
 		mode: 'none',
@@ -34,7 +34,7 @@ export const SELECTABLE_ACTIONS: BodyAction[] = [
 ];
 export const BACK_ONLY_ACTIONS: BodyAction[] = [
 	{
-		label: 'Back',
+		label: 'actions.back',
 		id: 'back_button',
 		disabled: false,
 		mode: 'none',
@@ -45,7 +45,7 @@ export const BACK_ONLY_ACTIONS: BodyAction[] = [
 ];
 export const PRESENTATION_ACTIONS: BodyAction[] = [
 	{
-		label: 'Next',
+		label: 'actions.next',
 		id: 'next_button',
 		disabled: true,
 		mode: 'none',
@@ -54,7 +54,7 @@ export const PRESENTATION_ACTIONS: BodyAction[] = [
 		code: ActionCode.NEXT
 	},
 	{
-		label: 'Back',
+		label: 'actions.back',
 		id: 'back_button',
 		disabled: false,
 		mode: 'none',

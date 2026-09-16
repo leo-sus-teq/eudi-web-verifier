@@ -28,6 +28,7 @@ import { DcApiTransaction } from '@core/models/InitializedTransaction';
 import { MatButtonModule } from '@angular/material/button';
 import { concatMap } from 'rxjs';
 import { DCApiTransactionInitializationRequest } from '@app/core/models/TransactionInitializationRequest';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'vc-dc-api',
@@ -66,6 +67,7 @@ export class DcApiComponent implements OnInit {
     private readonly navigateService: NavigateService,
     private readonly injector: Injector,
     private readonly cdr: ChangeDetectorRef,
+    private readonly translate: TranslateService,
   ) {
     this.localStorageService = this.injector.get(LocalStorageService);
     this.dialog = this.injector.get(MatDialog);
@@ -130,7 +132,7 @@ export class DcApiComponent implements OnInit {
     const protocol = 'openid4vp-v1-signed';
     if (!userAgentAllowsProtocol(protocol)) {
       return Promise.reject(
-        new Error(`Protocol ${protocol} is not supported by the user agent`),
+        new Error(this.translate.instant('dcApi.protocolNotSupported', { protocol })),
       );
     }
     return Promise.resolve({
@@ -152,7 +154,7 @@ export class DcApiComponent implements OnInit {
     this.dialog.open(OpenLogsComponent, {
       data: {
         transactionId: this.transaction.initialized_transaction.transaction_id,
-        label: 'Show Logs',
+        label: 'openLogs.defaultLabel',
         isInspectLogs: false,
       },
     });
@@ -160,7 +162,7 @@ export class DcApiComponent implements OnInit {
 
   private formatErrorMessage(error: any): string {
     if (!error) {
-      return 'An unknown error occurred while invoking the wallet.';
+      return this.translate.instant('dcApi.unknownError');
     }
 
     if (typeof error === 'string') {

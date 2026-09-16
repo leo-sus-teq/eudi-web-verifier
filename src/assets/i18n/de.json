@@ -1,0 +1,260 @@
+{
+  "actions": {
+    "back": "Zurück",
+    "close": "Schließen",
+    "copyContent": "Inhalt kopieren",
+    "loading": "Wird geladen …",
+    "next": "Weiter",
+    "save": "Speichern"
+  },
+  "attestationSelection": {
+    "allAttributes": "Alle Attribute",
+    "attributesByLabel": "-- Attribute nach --",
+    "chooseFormatError": "Bitte wählen Sie ein Format",
+    "chooseMethodError": "Bitte wählen Sie eine Methode",
+    "formatLabel": "-- Format --",
+    "specificAttributes": "Bestimmte Attribute"
+  },
+  "attestations": {
+    "arbeitsvertrag": {
+      "_name": "Arbeitsbescheinigung (TRUSTEQ)",
+      "contract_type": "Vertragsart",
+      "department": "Abteilung",
+      "employee_family_name": "Nachname des Arbeitnehmers",
+      "employee_given_name": "Vorname des Arbeitnehmers",
+      "employer": "Arbeitgeber",
+      "employment_start_date": "Beschäftigungsbeginn",
+      "job_title": "Berufsbezeichnung"
+    },
+    "ehic": {
+      "_name": "Europäische Krankenversicherungskarte (EHIC)",
+      "competent_institution": "Zuständiger Träger",
+      "credential_holder": "Karteninhaber",
+      "document_id": "Dokumentkennung",
+      "ending_date": "Gültig bis",
+      "social_security_pin": "Sozialversicherungsnummer",
+      "starting_date": "Gültig ab",
+      "subject": "Betroffene Person"
+    },
+    "learning_credential": {
+      "_name": "Diplom",
+      "achievement_title": "Abschlussbezeichnung",
+      "assessment_grade": "Bewertungsnote",
+      "date_of_issuance": "Ausstellungsdatum",
+      "expected_study_time": "Voraussichtliche Studiendauer",
+      "family_name": "Nachname(n)",
+      "given_name": "Vorname(n)",
+      "integration_stackability_options": "Integrations- oder Anrechnungsmöglichkeiten",
+      "issuing_authority": "Ausstellende Behörde",
+      "issuing_country": "Ausstellungsland",
+      "language_of_classes": "Unterrichtssprache",
+      "learner_identification": "Lernendenkennung",
+      "learning_outcomes": "Lernergebnisse",
+      "level_of_learning_experience": "Niveau der Lernerfahrung",
+      "prerequisites_to_enroll": "Zulassungsvoraussetzungen",
+      "types_of_quality_assurance": "Arten der Qualitätssicherung"
+    },
+    "mdl": {
+      "_name": "Mobiler Führerschein (MDL)",
+      "administrative_number": "Verwaltungsnummer",
+      "age_birth_year": "Geburtsjahr",
+      "age_in_years": "Alter in Jahren",
+      "age_over_18": "Alter über 18",
+      "age_over_21": "Alter über 21",
+      "birth_date": "Geburtsdatum",
+      "birth_place": "Geburtsort",
+      "document_number": "Dokumentennummer",
+      "driving_privileges": "Fahrerlaubnisklassen",
+      "expiry_date": "Ablaufdatum",
+      "eye_colour": "Augenfarbe",
+      "family_name": "Nachname",
+      "family_name_national_character": "Nachname in Landesschrift",
+      "given_name": "Vorname",
+      "given_name_national_character": "Vorname in Landesschrift",
+      "hair_colour": "Haarfarbe",
+      "height": "Körpergröße",
+      "issue_date": "Ausstellungsdatum",
+      "issuing_authority": "Ausstellende Behörde",
+      "issuing_country": "Ausstellungsland",
+      "issuing_jurisdiction": "Ausstellender Gerichtsbezirk",
+      "nationality": "Staatsangehörigkeit",
+      "portrait": "Porträtfoto",
+      "portrait_capture_date": "Aufnahmedatum des Porträtfotos",
+      "resident_address": "Wohnadresse",
+      "resident_city": "Wohnort",
+      "resident_country": "Wohnsitzland",
+      "resident_postal_code": "Postleitzahl",
+      "resident_state": "Wohnsitzbundesland",
+      "sex": "Geschlecht",
+      "signature_usual_mark": "Unterschrift/übliches Zeichen",
+      "un_distinguishing_sign": "UN-Unterscheidungszeichen",
+      "weight": "Körpergewicht"
+    },
+    "pid": {
+      "_name": "Personenidentifizierungsdaten (PID)",
+      "birth_date": "Geburtsdatum",
+      "document_number": "Dokumentennummer",
+      "email_address": "E-Mail-Adresse",
+      "expiry_date": "Ablaufdatum",
+      "family_name": "Nachname",
+      "family_name_birth": "Nachname bei Geburt",
+      "given_name": "Vorname",
+      "given_name_birth": "Vorname bei Geburt",
+      "issuance_date": "Ausstellungsdatum",
+      "issuing_authority": "Ausstellende Behörde",
+      "issuing_country": "Ausstellungsland",
+      "issuing_jurisdiction": "Ausstellender Gerichtsbezirk",
+      "mobile_phone_number": "Mobiltelefonnummer",
+      "nationality": "Staatsangehörigkeit",
+      "personal_administrative_number": "Persönliche Verwaltungsnummer",
+      "place_of_birth": "Geburtsort",
+      "portrait": "Porträtfoto",
+      "resident_address": "Wohnadresse",
+      "resident_city": "Wohnort",
+      "resident_country": "Wohnsitzland",
+      "resident_house_number": "Hausnummer",
+      "resident_postal_code": "Postleitzahl",
+      "resident_state": "Wohnsitzbundesland",
+      "resident_street": "Straße",
+      "sex": "Geschlecht",
+      "trust_anchor": "Vertrauensanker"
+    },
+    "residence_permit": {
+      "_name": "Aufenthaltstitel",
+      "administrative_number": "Verwaltungsnummer",
+      "birth_date": "Geburtsdatum",
+      "date_of_expiry": "Ablaufdatum",
+      "date_of_issuance": "Ausstellungsdatum",
+      "document_number": "Dokumentennummer",
+      "family_name": "Nachname",
+      "given_name": "Vorname",
+      "issuing_authority": "Ausstellende Behörde",
+      "issuing_country": "Ausstellungsland",
+      "nationality": "Staatsangehörigkeit",
+      "resident_address": "Wohnadresse"
+    },
+    "schufa": {
+      "_name": "Schufa-Bonitätsauskunft",
+      "birth_date": "Geburtsdatum",
+      "credit_score": "Bonitätswert",
+      "family_name": "Nachname",
+      "given_name": "Vorname",
+      "issuing_entity": "Ausstellende Stelle",
+      "report_date": "Auskunftsdatum",
+      "valid_until": "Gültig bis"
+    }
+  },
+  "attributeSelection": {
+    "allAttributesSelected": "Alle Attribute ausgewählt",
+    "selectAttributesBtn": "Attribute auswählen"
+  },
+  "customRequest": {
+    "channelRedirects": "Weiterleitungen",
+    "chooseChannel": "Wählen Sie den Übertragungskanal für die Anfrage",
+    "editorTitle": "Präsentationsanfrage initialisieren",
+    "invalidJson": "Ungültiges JSON-Format",
+    "submissionMethod": "Übertragungsmethode"
+  },
+  "dcApi": {
+    "errorOccurred": "Ein Fehler ist aufgetreten",
+    "protocolNotSupported": "Protokoll {{protocol}} wird vom User-Agent nicht unterstützt",
+    "title": "Wallet wird über die DC API ausgelöst",
+    "unknownError": "Beim Aufrufen der Wallet ist ein unbekannter Fehler aufgetreten."
+  },
+  "header": {
+    "configureIssuerChain": "Issuer-Kette konfigurieren",
+    "inspectLogs": "Transaktionsprotokolle prüfen",
+    "menu": "Menü",
+    "viewTransactionLogs": "Transaktionsprotokolle anzeigen"
+  },
+  "home": {
+    "advancedSummary": "Erweitert: Attribute, Format und Übertragungsoptionen anpassen",
+    "customRequestHintLink": "hier",
+    "customRequestHintPrefix": "Oder, falls dies für Sie nicht funktioniert, definieren Sie Ihre Präsentationsanfrage direkt",
+    "intro": "Wählen Sie unten einen Nachweis aus und scannen Sie dann den QR-Code mit Ihrer EUDI Wallet App, um ihn zu prüfen.",
+    "nothingPreparedYet": "..noch nichts vorbereitet ...",
+    "requestSoFarTitle": "Ihre Präsentationsanfrage bisher...",
+    "step1Label": "... Nachweis(e) auswählen",
+    "step2Label": "...Attribute der Nachweis(e) auswählen",
+    "step3Label": "...Präsentationsoptionen auswählen und senden",
+    "submitBtn": "Senden",
+    "tabDcApi": "Über DC API senden",
+    "tabRedirects": "Mit Weiterleitungen senden",
+    "title": "Einen Nachweis prüfen",
+    "verifyBtn": "Prüfen"
+  },
+  "invokeWallet": {
+    "title": "Wallet aufrufen"
+  },
+  "issuerChain": {
+    "clearBtn": "Leeren",
+    "clearedNote": "Dieser Wert wird am Ende jeder Sitzung gelöscht.",
+    "fieldLabel": "Issuer-Zertifikatskette",
+    "intro": "Konfigurieren Sie eine vertrauenswürdige Issuer-Zertifikatskette. Der Verifier verwendet diese Zertifikatskette, um das Zertifikat des Issuers zu validieren, wobei jegliches anderweitig konfigurierte Vertrauen umgangen wird. Die Zertifikatskette sollte im PEM-Format vorliegen und die Markierungen <i>-----BEGIN CERTIFICATE-----</i> und <i>-----END CERTIFICATE-----</i> enthalten.",
+    "invalidFormatError": "Ungültiges Format der Zertifikatskette. Bitte geben Sie eine gültige Zertifikatskette an.",
+    "title": "Vertrauenswürdige Issuer-Zertifikatskette konfigurieren"
+  },
+  "layout": {
+    "compatibleWith": "Dieser Verifier ist kompatibel mit"
+  },
+  "openLogs": {
+    "defaultLabel": "Protokolle anzeigen",
+    "transactionId": "Transaktions-ID",
+    "transactionIdPlaceholder": "Transaktions-ID eingeben"
+  },
+  "presentationOptions": {
+    "authEndpointHelper": "Geben Sie eine Endpunkt-URI für die Autorisierungsanfrage an",
+    "authEndpointLabel": "Autorisierungsendpunkt",
+    "copyRegCert": "Registrierungszertifikat kopieren",
+    "copyRegCertAriaLabel": "Registrierungszertifikat in die Zwischenablage kopieren",
+    "dcApiUnsupported": "Die DC API wird vom aktuellen User-Agent nicht unterstützt.",
+    "expectedOrigins": "Erwartete Origins",
+    "expectedOriginsHelper": "Kommagetrennte Liste erwarteter Origin-Werte für die DC-API-Anfrage",
+    "intendedUseHelper": "Legt den vorgesehenen Verwendungszweck der Präsentationsanfrage fest",
+    "intendedUseLabel": "Verwendungszweck",
+    "noneOption": "-- Keine --",
+    "postOrGet": "POST oder GET",
+    "profileHelper": "Definiert die Regeln und Einschränkungen der Präsentation",
+    "profileLabel": "Präsentationsprofil",
+    "regCertHelper": "Optionales Zertifikat (im JWT-Format), das in die Präsentationsanfrage aufgenommen wird",
+    "regCertLabel": "Registrierungszertifikat",
+    "regCertPlaceholder": "Registrierungszertifikat eingeben",
+    "regCertWillBeUsed": "Dieses Registrierungszertifikat wird für die Präsentation verwendet",
+    "requestUriMethodHelper": "Wählen Sie, wie die Wallet die Autorisierungsanfrage abruft",
+    "requestUriMethodLabel": "Request-URI-Methode",
+    "rulesDefinedBy": "Die Präsentationen folgen den Regeln, die definiert sind durch",
+    "subtitle": "Konfigurieren Sie die Optionen für Ihre Präsentationsanfrage.",
+    "title": "Präsentationsoptionen"
+  },
+  "qrCode": {
+    "ariaLabel": "QR-Code-Bild mit folgendem Inhalt...",
+    "copyLinkBelow": "Oder kopieren Sie den untenstehenden Link",
+    "downloadAsImage": "als Bild herunterladen",
+    "openWithWalletBtn": "MIT WALLET ÖFFNEN",
+    "orSeparator": "- ODER -",
+    "qrCodeLinkText": "QR-Code",
+    "scanPrefix": "Scannen Sie den",
+    "scanSuffix": "oben mit Ihrem Smartphone"
+  },
+  "results": {
+    "documentsCountSuffix": "Nachweise",
+    "errorPrefix": "Fehler:",
+    "forQuery": "für Abfrage",
+    "formatLabel": "im Format {{format}}",
+    "requestedFor": "Sie haben angefordert...",
+    "transactionLogLink": "Transaktionsprotokoll",
+    "viewContentBtn": "Inhalt anzeigen",
+    "walletResponded": "...und die Wallet hat mit folgenden Dokumenten geantwortet ..."
+  },
+  "selectableAttributes": {
+    "intro": "Wählen Sie die Attribute des Nachweises aus, die in die Anfrage aufgenommen werden sollen",
+    "selectBtn": "Auswählen"
+  },
+  "viewAttestation": {
+    "attributesTab": "Attribute",
+    "metadataTab": "Metadaten"
+  },
+  "walletResponse": {
+    "decodeErrorTitle": "Fehler beim Dekodieren des Dokuments im Format {{format}}"
+  }
+}

@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-label>-- attributes by --</mat-label>
+  <mat-label>{{ 'attestationSelection.attributesByLabel' | translate }}</mat-label>
   <mat-select
     matNativeControl
     [(value)]="selectedMethod"
@@ -11,12 +11,12 @@
     </ng-container>
   </mat-select>
   <mat-error *ngIf="methodControl.hasError('required')"
-    >Please choose a method</mat-error
+    >{{ 'attestationSelection.chooseMethodError' | translate }}</mat-error
   >
 </mat-form-field>
 
 <mat-form-field>
-  <mat-label>-- format --</mat-label>
+  <mat-label>{{ 'attestationSelection.formatLabel' | translate }}</mat-label>
   <mat-select
     matNativeControl
     [(value)]="selectedFormat"
@@ -30,6 +30,6 @@
     </ng-container>
   </mat-select>
   <mat-error *ngIf="formatControl.hasError('required')"
-    >Please choose an format</mat-error
+    >{{ 'attestationSelection.chooseFormatError' | translate }}</mat-error
   >
 </mat-form-field>

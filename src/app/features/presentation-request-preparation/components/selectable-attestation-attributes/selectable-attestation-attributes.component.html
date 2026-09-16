@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>{{ data.attestationName }}</h2>
+<h2 mat-dialog-title>{{ data.attestationName | translate }}</h2>
 
 <mat-dialog-content class="mat-typography">
   <div>
     <div>
       <div>
-        Select attributes of the attestation to be included in the request
+        {{ 'selectableAttributes.intro' | translate }}
       </div>
       <ng-container
         *ngFor="let field of formFields; index as idx; trackBy: trackByFn"
@@ -30,7 +30,7 @@
     matBadgeHidden="{{ selectedFields.length === 0 }}"
     matBadgeColor="accent"
   >
-    Select
+    {{ 'selectableAttributes.selectBtn' | translate }}
   </button>
-  <button mat-stroked-button mat-dialog-close>Close</button>
+  <button mat-stroked-button mat-dialog-close>{{ 'actions.close' | translate }}</button>
 </mat-dialog-actions>

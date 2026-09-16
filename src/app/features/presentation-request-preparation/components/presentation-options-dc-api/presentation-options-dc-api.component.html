@@ -1,8 +1,8 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Presentation Options</mat-card-title>
+    <mat-card-title>{{ 'presentationOptions.title' | translate }}</mat-card-title>
     <mat-card-subtitle>
-      Configure the options for your presentation request.
+      {{ 'presentationOptions.subtitle' | translate }}
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -11,13 +11,13 @@
       <div class="request-options-grid">
         <div class="request-options-row">
           <div class="request-options-label">
-            <span>Presentation Profile</span>
+            <span>{{ 'presentationOptions.profileLabel' | translate }}</span>
             <p class="request-options-helper">
-              Defines the rules and constraints of the presentation
+              {{ 'presentationOptions.profileHelper' | translate }}
             </p>
           </div>
           <div class="request-options-control">
-            The presentations follow the rules defined by
+            {{ 'presentationOptions.rulesDefinedBy' | translate }}
             <a
               target="_blank"
               href="https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.02.01_60/ts_11947202v010201p.pdf"
@@ -28,14 +28,14 @@
 
         <div class="request-options-row">
           <div class="request-options-label">
-            <span>Expected origins</span>
+            <span>{{ 'presentationOptions.expectedOrigins' | translate }}</span>
             <p class="request-options-helper">
-              Comma-separated list of expected origin values for the DC API request
+              {{ 'presentationOptions.expectedOriginsHelper' | translate }}
             </p>
           </div>
           <div class="request-options-control">
             <mat-form-field class="config-option-field">
-              <mat-label>Expected origins</mat-label>
+              <mat-label>{{ 'presentationOptions.expectedOrigins' | translate }}</mat-label>
               <input
                 matInput
                 [placeholder]="defaultOrigins"
@@ -43,7 +43,7 @@
                 (input)="
                   handleExpectedOriginsChange(expectedOriginsControl.value)
                 "
-                aria-label="Expected origins"
+                [attr.aria-label]="'presentationOptions.expectedOrigins' | translate"
                 autocomplete="off"
               />
             </mat-form-field>
@@ -53,7 +53,7 @@
     </ng-container>
     <ng-template #unsupported>
       <div class="unsupported-message">
-        <p>DC API is not supported by the current user agent.</p>
+        <p>{{ 'presentationOptions.dcApiUnsupported' | translate }}</p>
       </div>
     </ng-template>
   </mat-card-content>

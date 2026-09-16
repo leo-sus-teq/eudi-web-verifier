@@ -2,10 +2,8 @@
   <ng-container *ngFor="let selection of attestationsSelection">
     <mat-card >
       <mat-card-header>
-        <mat-card-title>{{ nameOf(selection.type) }}</mat-card-title>
-        <mat-card-subtitle>
-          in <i> {{ selection.format }} </i> format</mat-card-subtitle
-        >
+        <mat-card-title>{{ nameOf(selection.type) | translate }}</mat-card-title>
+        <mat-card-subtitle>{{ 'results.formatLabel' | translate: { format: selection.format } }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions align="end">
         <button
@@ -22,7 +20,7 @@
             )
           "
         >
-          Select Attributes
+          {{ 'attributeSelection.selectAttributesBtn' | translate }}
         </button>
         <button
           mat-button
@@ -31,7 +29,7 @@
           matBadge="{{ fieldsSelectedNo(selection) }}"
           [disabled]="true"
         >
-          All Attributes selected
+          {{ 'attributeSelection.allAttributesSelected' | translate }}
         </button>
       </mat-card-actions>
     </mat-card>

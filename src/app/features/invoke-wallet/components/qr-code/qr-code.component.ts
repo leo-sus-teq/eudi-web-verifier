@@ -131,7 +131,7 @@ export class QrCodeComponent implements OnInit, OnDestroy {
     this.dialog.open(OpenLogsComponent, {
       data: {
         transactionId: this.transaction.initialized_transaction.transaction_id,
-        label: 'Show Logs',
+        label: 'openLogs.defaultLabel',
         isInspectLogs: false
       },
     });

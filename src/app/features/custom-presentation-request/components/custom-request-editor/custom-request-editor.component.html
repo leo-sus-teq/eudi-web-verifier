@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Initialize presentation request</mat-card-title>
+    <mat-card-title>{{ 'customRequest.editorTitle' | translate }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <vc-editor
@@ -8,17 +8,17 @@
       (request)="onRequestChanged($event)"
     ></vc-editor>
     <div *ngIf="!invalidJSON" class="vc-box-display-error">
-      <p>Invalid JSON Format</p>
+      <p>{{ 'customRequest.invalidJson' | translate }}</p>
     </div>
 
     <div>
-      <p>Choose the request submission channel</p>
+      <p>{{ 'customRequest.chooseChannel' | translate }}</p>
       <mat-button-toggle-group
         [(ngModel)]="channel"
         (valueChange)="onChannelChanged($event)"
-        aria-label="Submission Method"
+        [attr.aria-label]="'customRequest.submissionMethod' | translate"
       >
-        <mat-button-toggle value="redirects">Redirects</mat-button-toggle>
+        <mat-button-toggle value="redirects">{{ 'customRequest.channelRedirects' | translate }}</mat-button-toggle>
         <mat-button-toggle value="dc-api">DC API</mat-button-toggle>
       </mat-button-toggle-group>
     </div>

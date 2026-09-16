@@ -1,21 +1,20 @@
-<h2 mat-dialog-title>Configure Trusted Issuer Certificate Chain</h2>
+<h2 mat-dialog-title>{{ 'issuerChain.title' | translate }}</h2>
 
 <mat-dialog-content class="mat-typography">
   <div style="padding: 2px">
-    <span
-      >Configure a trusted issuer certificate chain. The verifier will use this
-      certificate chain to validate the issuer's certificate, bypassing any
-      other configured trust. The certificate chain should be in PEM format and
-      should include the <i>-----BEGIN CERTIFICATE-----</i> and
-      <i>-----END CERTIFICATE-----</i> markers.
-    </span>
+    <!-- Full sentence (including the two literal, untranslated PEM markers)
+         comes from the translation itself via innerHTML rather than being
+         split across several translate calls interleaved with static <i>
+         tags - much less fragile than reassembling one sentence from three
+         translated fragments in two languages with different word order. -->
+    <span [innerHTML]="'issuerChain.intro' | translate"></span>
     <br />
-    <span>This value is cleared at the end of each session.</span>
+    <span>{{ 'issuerChain.clearedNote' | translate }}</span>
   </div>
 
   <form>
     <mat-form-field class="example-full-width">
-      <mat-label>Issuer certificate chain</mat-label>
+      <mat-label>{{ 'issuerChain.fieldLabel' | translate }}</mat-label>
       <textarea
         matInput
         cdkTextareaAutosize
@@ -30,22 +29,21 @@
 "
       ></textarea>
       <mat-error *ngIf="issuerChainControl.hasError('invalidCertificate')">
-        Invalid certificate chain format. Please provide a valid certificate
-        chain.
+        {{ 'issuerChain.invalidFormatError' | translate }}
       </mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close (click)="clear()">Clear</button>
+  <button mat-button mat-dialog-close (click)="clear()">{{ 'issuerChain.clearBtn' | translate }}</button>
   <button
     mat-button
     mat-dialog-close
     (click)="save()"
     [disabled]="issuerChainControl.invalid"
   >
-    Save
+    {{ 'actions.save' | translate }}
   </button>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close>{{ 'actions.close' | translate }}</button>
 </mat-dialog-actions>

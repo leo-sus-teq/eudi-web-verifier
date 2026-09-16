@@ -1,8 +1,8 @@
 <vc-wallet-layout>
   <div body>
-    <h4>Verify a credential</h4>
+    <h4>{{ 'home.title' | translate }}</h4>
     <p class="verifier-hint">
-      Pick a credential below, then scan the QR code with your EUDI Wallet app to verify it.
+      {{ 'home.intro' | translate }}
     </p>
 
     <!-- One click to pick a credential (requests every attribute, over the
@@ -19,7 +19,7 @@
         (click)="selectQuickAttestation(attestation.type)"
       >
         <span class="credential-card-icon" aria-hidden="true">{{ iconFor(attestation.type) }}</span>
-        <span class="credential-card-label">{{ attestation.name }}</span>
+        <span class="credential-card-label">{{ attestation.name | translate }}</span>
       </button>
     </div>
 
@@ -31,18 +31,18 @@
         (click)="proceedToInvokeWallet()"
         [disabled]="!canSubmit()"
       >
-        Verify
+        {{ 'home.verifyBtn' | translate }}
       </button>
     </div>
 
     <details class="advanced-section">
-      <summary>Advanced: customize attributes, format, and submission options</summary>
+      <summary>{{ 'home.advancedSummary' | translate }}</summary>
 
       <mat-stepper orientation="vertical" linear #stepper>
         <form>
           <mat-step>
             <div>
-              <ng-template matStepLabel>... select attestation(s)</ng-template>
+              <ng-template matStepLabel>{{ 'home.step1Label' | translate }}</ng-template>
               <vc-supported-attestations
                 (selectionChangedEvent)="handleSelectionChangedEvent($event)"
               ></vc-supported-attestations>
@@ -54,7 +54,7 @@
                 matStepperNext
                 [disabled]="!attestationsSelected()"
               >
-                Next
+                {{ 'actions.next' | translate }}
               </button>
             </div>
           </mat-step>
@@ -62,7 +62,7 @@
           <mat-step>
             <div>
               <ng-template matStepLabel
-              >...select attestation(s) attributes
+              >{{ 'home.step2Label' | translate }}
               </ng-template
               >
               <vc-attribute-selection
@@ -74,20 +74,20 @@
               ></vc-attribute-selection>
             </div>
             <div class="button-container">
-              <button mat-raised-button matStepperPrevious>Back</button>
+              <button mat-raised-button matStepperPrevious>{{ 'actions.back' | translate }}</button>
               <button
                 mat-raised-button
                 matStepperNext
                 [disabled]="!attributesSelected()"
               >
-                Next
+                {{ 'actions.next' | translate }}
               </button>
             </div>
           </mat-step>
 
           <mat-step>
             <div style="padding-top: 10px">
-              <ng-template matStepLabel>...select presentation options and submit</ng-template>
+              <ng-template matStepLabel>{{ 'home.step3Label' | translate }}</ng-template>
 
               <mat-tab-group (selectedTabChange)="handleRequestModeChange($event)">
 
@@ -98,7 +98,7 @@
                 <!-------------------------------------------------------------------->
 
 
-                <mat-tab label="Submit with Redirects">
+                <mat-tab [label]="'home.tabRedirects' | translate">
 
                   <div class="presentation-options-container">
                     <vc-presentation-options-redirects
@@ -117,7 +117,7 @@
                 <!-------------------------------------------------------------------->
                 <!-------------------------------------------------------------------->
 
-                <mat-tab label="Submit via DC API">
+                <mat-tab [label]="'home.tabDcApi' | translate">
 
                   <div class="presentation-options-container">
                     <vc-presentation-options-dc-api
@@ -136,7 +136,7 @@
 
               <div class="button-container">
                 <button mat-raised-button matStepperPrevious type="button">
-                  Back
+                  {{ 'actions.back' | translate }}
                 </button>
                 <button
                   mat-raised-button
@@ -145,7 +145,7 @@
                   (click)="proceedToInvokeWallet()"
                   [disabled]="!canSubmit()"
                 >
-                  Submit
+                  {{ 'home.submitBtn' | translate }}
                 </button>
               </div>
 
@@ -153,14 +153,14 @@
                 <mat-expansion-panel-header>
                   <mat-panel-title
                   ><span
-                  >Your presentation request so far...</span
+                  >{{ 'home.requestSoFarTitle' | translate }}</span
                   ></mat-panel-title
                   >
                 </mat-expansion-panel-header>
 
                 <button
                   mat-button
-                  matTooltip="Copy content"
+                  [matTooltip]="'actions.copyContent' | translate"
                   style="float: right"
                   *ngIf="canProceed()"
                   [cdkCopyToClipboard]="initializationRequest | json"
@@ -171,7 +171,7 @@
                     initializationRequest | json
                   }}</span>
 
-                <pre *ngIf="!canProceed()">..nothing prepared yet...</pre>
+                <pre *ngIf="!canProceed()">{{ 'home.nothingPreparedYet' | translate }}</pre>
               </mat-expansion-panel>
 
             </div>
@@ -181,9 +181,8 @@
     </details>
 
     <p>
-      Or, if this doesn't work for you, go straight to defining your
-      presentation request
-      <a routerLink="/custom-request" routerLinkActive="active">here</a>
+      {{ 'home.customRequestHintPrefix' | translate }}
+      <a routerLink="/custom-request" routerLinkActive="active">{{ 'home.customRequestHintLink' | translate }}</a>
     </p>
   </div>
 </vc-wallet-layout>
