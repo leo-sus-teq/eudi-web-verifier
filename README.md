@@ -7,7 +7,9 @@
 > `./demo-up.sh` from the repo root, you won't interact with this
 > directory directly at all — see "How this fits into the demo" below for
 > why, and skip straight to "Re-designed for this demo" for what's
-> actually different here from a plain upstream checkout.
+> actually different here from a plain upstream checkout, or
+> [`../docs/technical/components/verifier.md`](../docs/technical/components/verifier.md)
+> for the short version alongside the verifier backend.
 
 The web UI a human actually clicks through at `https://verifier.localhost/`
 — a Angular single-page app that talks to the [`eudi-srv-verifier-endpoint`](../eudi-srv-verifier-endpoint/)
